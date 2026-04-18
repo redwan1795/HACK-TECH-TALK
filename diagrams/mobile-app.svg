@@ -1,0 +1,441 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="1080" viewBox="0 0 960 1080">
+<defs>
+  <linearGradient id="hdr" x1="0%" y1="0%" x2="100%" y2="0%">
+    <stop offset="0%" stop-color="#1B5E3A"/>
+    <stop offset="100%" stop-color="#1E3A5F"/>
+  </linearGradient>
+  <linearGradient id="phoneBg" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#1C1C1E"/>
+    <stop offset="100%" stop-color="#2C2C2E"/>
+  </linearGradient>
+  <linearGradient id="backendBg" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#1E293B"/>
+    <stop offset="100%" stop-color="#0F172A"/>
+  </linearGradient>
+  <filter id="sh">
+    <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#00000022"/>
+  </filter>
+  <filter id="phoneSh">
+    <feDropShadow dx="0" dy="8" stdDeviation="16" flood-color="#00000040"/>
+  </filter>
+  <marker id="arr" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+    <polygon points="0 0,8 3,0 6" fill="#64748B"/>
+  </marker>
+  <marker id="arrG" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+    <polygon points="0 0,8 3,0 6" fill="#16A34A"/>
+  </marker>
+  <marker id="arrB" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+    <polygon points="0 0,8 3,0 6" fill="#3B82F6"/>
+  </marker>
+</defs>
+
+<!-- BG -->
+<rect width="960" height="1080" fill="#EEF2F7"/>
+
+<!-- ═══════════ HEADER ═══════════ -->
+<rect width="960" height="66" fill="url(#hdr)"/>
+<text x="480" y="25" text-anchor="middle" fill="white" font-family="Arial,sans-serif" font-size="19" font-weight="bold" letter-spacing="1.5">COMMUNITY GARDEN — Mobile App</text>
+<text x="480" y="50" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-family="Arial,sans-serif" font-size="11">React Native · Expo · TypeScript · Zustand · TanStack Query · Same Backend API</text>
+<rect x="820" y="16" width="80" height="20" rx="10" fill="rgba(255,255,255,0.18)"/>
+<text x="860" y="30" text-anchor="middle" fill="white" font-family="Arial,sans-serif" font-size="10">iOS + Android</text>
+
+<!-- ═══════════ NAVIGATION STRUCTURE ═══════════ -->
+<rect x="8" y="74" width="944" height="118" rx="10" fill="white" stroke="#CBD5E1" stroke-width="1" filter="url(#sh)"/>
+<text x="22" y="92" fill="#334155" font-family="Arial,sans-serif" font-size="11" font-weight="bold" letter-spacing="0.8">NAVIGATION STRUCTURE — Expo Router / React Navigation</text>
+
+<!-- RootNavigator -->
+<rect x="390" y="100" width="180" height="32" rx="6" fill="#1E293B"/>
+<text x="480" y="120" text-anchor="middle" fill="#94A3B8" font-family="Arial,sans-serif" font-size="10" font-weight="bold">Root Navigator</text>
+<!-- lines from root to stacks -->
+<line x1="480" y1="132" x2="480" y2="142" stroke="#CBD5E1" stroke-width="1.2"/>
+<line x1="140" y1="142" x2="820" y2="142" stroke="#CBD5E1" stroke-width="1.2"/>
+<line x1="140" y1="142" x2="140" y2="152" stroke="#CBD5E1" stroke-width="1.2" marker-end="url(#arr)"/>
+<line x1="340" y1="142" x2="340" y2="152" stroke="#CBD5E1" stroke-width="1.2" marker-end="url(#arr)"/>
+<line x1="540" y1="142" x2="540" y2="152" stroke="#CBD5E1" stroke-width="1.2" marker-end="url(#arr)"/>
+<line x1="740" y1="142" x2="740" y2="152" stroke="#CBD5E1" stroke-width="1.2" marker-end="url(#arr)"/>
+<line x1="820" y1="142" x2="820" y2="152" stroke="#CBD5E1" stroke-width="1.2" marker-end="url(#arr)"/>
+
+<!-- Auth Stack -->
+<rect x="62" y="152" width="156" height="26" rx="5" fill="#475569"/>
+<text x="140" y="168" text-anchor="middle" fill="white" font-family="Arial,sans-serif" font-size="9" font-weight="bold">Auth Stack</text>
+
+<!-- Discover Tab -->
+<rect x="246" y="152" width="188" height="26" rx="5" fill="#1D4ED8"/>
+<text x="340" y="168" text-anchor="middle" fill="white" font-family="Arial,sans-serif" font-size="9" font-weight="bold">Discover Tab Stack</text>
+
+<!-- Commerce Tab -->
+<rect x="446" y="152" width="188" height="26" rx="5" fill="#065F46"/>
+<text x="540" y="168" text-anchor="middle" fill="white" font-family="Arial,sans-serif" font-size="9" font-weight="bold">Commerce Tab Stack</text>
+
+<!-- Future Orders Tab -->
+<rect x="646" y="152" width="188" height="26" rx="5" fill="#15803D"/>
+<text x="740" y="168" text-anchor="middle" fill="white" font-family="Arial,sans-serif" font-size="9" font-weight="bold">Future Orders Tab</text>
+
+<!-- Profile Tab -->
+<rect x="762" y="152" width="120" height="26" rx="5" fill="#C2410C"/>
+<text x="822" y="168" text-anchor="middle" fill="white" font-family="Arial,sans-serif" font-size="9" font-weight="bold">Profile Tab</text>
+
+<!-- ═══════════ TAB BAR ILLUSTRATION ═══════════ -->
+<rect x="8" y="204" width="944" height="52" rx="8" fill="#1C1C1E" stroke="#3A3A3C" stroke-width="1" filter="url(#sh)"/>
+<text x="480" y="218" text-anchor="middle" fill="#636366" font-family="Arial,sans-serif" font-size="9">BOTTOM TAB NAVIGATOR</text>
+
+<!-- Tab 1: Discover -->
+<rect x="30" y="214" width="170" height="34" rx="6" fill="#1D4ED8"/>
+<text x="115" y="229" text-anchor="middle" fill="white" font-family="Arial,sans-serif" font-size="10" font-weight="bold">Discover</text>
+<text x="115" y="241" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-family="Arial,sans-serif" font-size="8">AI Search · Browse</text>
+
+<!-- Tab 2: Commerce -->
+<rect x="210" y="214" width="170" height="34" rx="6" fill="#065F46"/>
+<text x="295" y="229" text-anchor="middle" fill="white" font-family="Arial,sans-serif" font-size="10" font-weight="bold">Orders</text>
+<text x="295" y="241" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-family="Arial,sans-serif" font-size="8">Cart · Checkout · History</text>
+
+<!-- Tab 3: Future Orders -->
+<rect x="390" y="214" width="170" height="34" rx="6" fill="#15803D"/>
+<text x="475" y="229" text-anchor="middle" fill="white" font-family="Arial,sans-serif" font-size="10" font-weight="bold">Future Orders</text>
+<text x="475" y="241" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-family="Arial,sans-serif" font-size="8">Demand Signals</text>
+
+<!-- Tab 4: Profile/Dashboard -->
+<rect x="570" y="214" width="170" height="34" rx="6" fill="#C2410C"/>
+<text x="655" y="229" text-anchor="middle" fill="white" font-family="Arial,sans-serif" font-size="10" font-weight="bold">Profile</text>
+<text x="655" y="241" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-family="Arial,sans-serif" font-size="8">Producer · Consumer</text>
+
+<!-- Admin tab (small) -->
+<rect x="750" y="214" width="90" height="34" rx="6" fill="#7E22CE"/>
+<text x="795" y="229" text-anchor="middle" fill="white" font-family="Arial,sans-serif" font-size="9" font-weight="bold">Admin</text>
+<text x="795" y="241" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-family="Arial,sans-serif" font-size="8">Operator only</text>
+
+<!-- home indicator -->
+<rect x="390" y="244" width="180" height="4" rx="2" fill="#AEAEB2"/>
+
+<!-- ═══════════ SCREEN COLUMNS ═══════════ -->
+
+<!-- ── COL 1: AUTH SCREENS (x=8 w=152) ── -->
+<rect x="8" y="268" width="152" height="430" rx="8" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1" filter="url(#sh)"/>
+<rect x="8" y="268" width="152" height="26" rx="8" fill="#475569"/>
+<rect x="8" y="282" width="152" height="12" fill="#475569"/>
+<text x="84" y="284" text-anchor="middle" fill="white" font-family="Arial,sans-serif" font-size="10" font-weight="bold">AUTH SCREENS</text>
+
+<!-- SplashScreen -->
+<rect x="16" y="303" width="136" height="56" rx="6" fill="white" stroke="#CBD5E1" stroke-width="1"/>
+<rect x="16" y="303" width="136" height="16" rx="6" fill="#E2E8F0"/>
+<rect x="16" y="311" width="136" height="8" fill="#E2E8F0"/>
+<text x="84" y="314" text-anchor="middle" fill="#334155" font-family="Arial,sans-serif" font-size="9" font-weight="bold">SplashScreen</text>
+<text x="84" y="329" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="8">logo · brand</text>
+<text x="84" y="341" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="8">auto-redirect check</text>
+<text x="84" y="352" text-anchor="middle" fill="#94A3B8" font-family="Arial,sans-serif" font-size="7">auth gate on mount</text>
+
+<!-- LoginScreen -->
+<rect x="16" y="368" width="136" height="66" rx="6" fill="white" stroke="#CBD5E1" stroke-width="1"/>
+<rect x="16" y="368" width="136" height="16" rx="6" fill="#E2E8F0"/>
+<rect x="16" y="376" width="136" height="8" fill="#E2E8F0"/>
+<text x="84" y="379" text-anchor="middle" fill="#334155" font-family="Arial,sans-serif" font-size="9" font-weight="bold">LoginScreen</text>
+<text x="84" y="395" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="8">email + password</text>
+<text x="84" y="407" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="8">JWT → SecureStore</text>
+<text x="84" y="419" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="8">biometric unlock (P2)</text>
+<text x="84" y="427" text-anchor="middle" fill="#94A3B8" font-family="Arial,sans-serif" font-size="7">native keyboard aware</text>
+
+<!-- RegisterScreen -->
+<rect x="16" y="443" width="136" height="66" rx="6" fill="white" stroke="#CBD5E1" stroke-width="1"/>
+<rect x="16" y="443" width="136" height="16" rx="6" fill="#E2E8F0"/>
+<rect x="16" y="451" width="136" height="8" fill="#E2E8F0"/>
+<text x="84" y="454" text-anchor="middle" fill="#334155" font-family="Arial,sans-serif" font-size="9" font-weight="bold">RegisterScreen</text>
+<text x="84" y="470" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="8">role picker</text>
+<text x="84" y="482" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="8">consumer / producer</text>
+<text x="84" y="494" text-anchor="middle" fill="#94A3B8" font-family="Arial,sans-serif" font-size="7">Picker component</text>
+
+<!-- Token storage note -->
+<rect x="16" y="518" width="136" height="50" rx="6" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="1" stroke-dasharray="3,2"/>
+<text x="84" y="535" text-anchor="middle" fill="#475569" font-family="Arial,sans-serif" font-size="9" font-weight="bold">Expo SecureStore</text>
+<text x="84" y="548" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="8">JWT storage (not localStorage)</text>
+<text x="84" y="560" text-anchor="middle" fill="#94A3B8" font-family="Arial,sans-serif" font-size="7">encrypted on device</text>
+
+<!-- Push Permissions -->
+<rect x="16" y="577" width="136" height="50" rx="6" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="1" stroke-dasharray="3,2"/>
+<text x="84" y="594" text-anchor="middle" fill="#475569" font-family="Arial,sans-serif" font-size="9" font-weight="bold">Push Permissions</text>
+<text x="84" y="607" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="8">FCM (Android)</text>
+<text x="84" y="619" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="8">APNs (iOS)</text>
+
+<!-- ── COL 2: DISCOVER (x=172 w=196) ── -->
+<rect x="172" y="268" width="196" height="430" rx="8" fill="#EFF6FF" stroke="#93C5FD" stroke-width="1.5" filter="url(#sh)"/>
+<rect x="172" y="268" width="196" height="26" rx="8" fill="#1D4ED8"/>
+<rect x="172" y="282" width="196" height="12" fill="#1D4ED8"/>
+<text x="270" y="284" text-anchor="middle" fill="white" font-family="Arial,sans-serif" font-size="10" font-weight="bold">DISCOVER TAB</text>
+<rect x="312" y="271" width="48" height="14" rx="7" fill="#FCD34D"/>
+<text x="336" y="281" text-anchor="middle" fill="#78350F" font-family="Arial,sans-serif" font-size="7" font-weight="bold">P0 PRIMARY</text>
+
+<!-- AISearchScreen -->
+<rect x="180" y="303" width="180" height="95" rx="6" fill="#DBEAFE" stroke="#3B82F6" stroke-width="2"/>
+<rect x="180" y="303" width="180" height="18" rx="6" fill="#2563EB"/>
+<rect x="180" y="313" width="180" height="8" fill="#2563EB"/>
+<text x="270" y="316" text-anchor="middle" fill="white" font-family="Arial,sans-serif" font-size="10" font-weight="bold">★  AISearchScreen</text>
+<text x="270" y="334" text-anchor="middle" fill="#1E40AF" font-family="Arial,sans-serif" font-size="9" font-weight="bold">"Find me some zucchini"</text>
+<text x="270" y="347" text-anchor="middle" fill="#2563EB" font-family="Arial,sans-serif" font-size="8">TextInput → POST /ai/search</text>
+<text x="270" y="360" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="8">FlatList of ListingCards</text>
+<text x="270" y="373" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="8">AI explanation text above</text>
+<text x="270" y="391" text-anchor="middle" fill="#94A3B8" font-family="Arial,sans-serif" font-size="7">tab: Discover (home)</text>
+
+<!-- ListingDetailScreen -->
+<rect x="180" y="407" width="180" height="70" rx="6" fill="white" stroke="#93C5FD" stroke-width="1"/>
+<rect x="180" y="407" width="180" height="17" rx="6" fill="#DBEAFE"/>
+<rect x="180" y="416" width="180" height="8" fill="#DBEAFE"/>
+<text x="270" y="419" text-anchor="middle" fill="#1D4ED8" font-family="Arial,sans-serif" font-size="9" font-weight="bold">ListingDetailScreen</text>
+<text x="270" y="434" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="8">image gallery (ScrollView)</text>
+<text x="270" y="446" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="8">Add to Cart · Subscribe</text>
+<text x="270" y="458" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="8">producer proximity badge</text>
+<text x="270" y="470" text-anchor="middle" fill="#94A3B8" font-family="Arial,sans-serif" font-size="7">push via Stack.navigate</text>
+
+<!-- BrowseScreen (fallback) -->
+<rect x="180" y="486" width="180" height="58" rx="6" fill="white" stroke="#93C5FD" stroke-width="1"/>
+<rect x="180" y="486" width="180" height="17" rx="6" fill="#DBEAFE"/>
+<rect x="180" y="495" width="180" height="8" fill="#DBEAFE"/>
+<text x="270" y="498" text-anchor="middle" fill="#1D4ED8" font-family="Arial,sans-serif" font-size="9" font-weight="bold">BrowseScreen (fallback)</text>
+<text x="270" y="513" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="8">keyword + ZIP filter</text>
+<text x="270" y="525" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="8">ScrollView · pull-to-refresh</text>
+<text x="270" y="537" text-anchor="middle" fill="#94A3B8" font-family="Arial,sans-serif" font-size="7">/listings?q=&amp;zip=&amp;radius=</text>
+
+<!-- Map View (stretch) -->
+<rect x="180" y="553" width="180" height="40" rx="6" fill="#F0F9FF" stroke="#93C5FD" stroke-width="1" stroke-dasharray="3,2"/>
+<text x="270" y="571" text-anchor="middle" fill="#0369A1" font-family="Arial,sans-serif" font-size="9" font-weight="bold">MapViewScreen (stretch)</text>
+<text x="270" y="583" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="8">react-native-maps · pin clusters</text>
+
+<!-- Filter Sheet -->
+<rect x="180" y="602" width="180" height="40" rx="6" fill="white" stroke="#93C5FD" stroke-width="1"/>
+<text x="270" y="620" text-anchor="middle" fill="#1D4ED8" font-family="Arial,sans-serif" font-size="9" font-weight="bold">FilterBottomSheet</text>
+<text x="270" y="632" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="8">category · radius slider · price</text>
+<text x="270" y="641" text-anchor="middle" fill="#94A3B8" font-family="Arial,sans-serif" font-size="7">@gorhom/bottom-sheet</text>
+
+<!-- ── COL 3: COMMERCE (x=380 w=190) ── -->
+<rect x="380" y="268" width="190" height="430" rx="8" fill="#F0FDF4" stroke="#6EE7B7" stroke-width="1.5" filter="url(#sh)"/>
+<rect x="380" y="268" width="190" height="26" rx="8" fill="#065F46"/>
+<rect x="380" y="282" width="190" height="12" fill="#065F46"/>
+<text x="475" y="284" text-anchor="middle" fill="white" font-family="Arial,sans-serif" font-size="10" font-weight="bold">COMMERCE TAB</text>
+
+<!-- CartScreen -->
+<rect x="388" y="303" width="174" height="68" rx="6" fill="white" stroke="#6EE7B7" stroke-width="1"/>
+<rect x="388" y="303" width="174" height="17" rx="6" fill="#D1FAE5"/>
+<rect x="388" y="312" width="174" height="8" fill="#D1FAE5"/>
+<text x="475" y="315" text-anchor="middle" fill="#065F46" font-family="Arial,sans-serif" font-size="9" font-weight="bold">CartScreen</text>
+<text x="475" y="330" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="8">FlatList of cart items</text>
+<text x="475" y="342" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="8">swipe-to-remove</text>
+<text x="475" y="354" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="8">subtotal + fee line item</text>
+<text x="475" y="364" text-anchor="middle" fill="#94A3B8" font-family="Arial,sans-serif" font-size="7">tab badge = item count</text>
+
+<!-- CheckoutScreen -->
+<rect x="388" y="380" width="174" height="70" rx="6" fill="white" stroke="#6EE7B7" stroke-width="1"/>
+<rect x="388" y="380" width="174" height="17" rx="6" fill="#D1FAE5"/>
+<rect x="388" y="389" width="174" height="8" fill="#D1FAE5"/>
+<text x="475" y="392" text-anchor="middle" fill="#065F46" font-family="Arial,sans-serif" font-size="9" font-weight="bold">CheckoutScreen</text>
+<text x="475" y="407" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="8">@stripe/stripe-react-native</text>
+<text x="475" y="419" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="8">PaymentSheet</text>
+<text x="475" y="431" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="8">Apple Pay / Google Pay</text>
+<text x="475" y="443" text-anchor="middle" fill="#94A3B8" font-family="Arial,sans-serif" font-size="7">native payment UX</text>
+
+<!-- OrderConfirmationScreen -->
+<rect x="388" y="459" width="174" height="62" rx="6" fill="white" stroke="#6EE7B7" stroke-width="1"/>
+<rect x="388" y="459" width="174" height="17" rx="6" fill="#D1FAE5"/>
+<rect x="388" y="468" width="174" height="8" fill="#D1FAE5"/>
+<text x="475" y="471" text-anchor="middle" fill="#065F46" font-family="Arial,sans-serif" font-size="9" font-weight="bold">OrderConfirmScreen</text>
+<text x="475" y="486" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="8">subtotal · fee · total</text>
+<text x="475" y="498" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="8">haptic feedback on success</text>
+<text x="475" y="514" text-anchor="middle" fill="#94A3B8" font-family="Arial,sans-serif" font-size="7">Demo Scenario 1 endpoint</text>
+
+<!-- OrderHistoryScreen -->
+<rect x="388" y="530" width="174" height="56" rx="6" fill="white" stroke="#6EE7B7" stroke-width="1"/>
+<rect x="388" y="530" width="174" height="17" rx="6" fill="#D1FAE5"/>
+<rect x="388" y="539" width="174" height="8" fill="#D1FAE5"/>
+<text x="475" y="542" text-anchor="middle" fill="#065F46" font-family="Arial,sans-serif" font-size="9" font-weight="bold">OrderHistoryScreen</text>
+<text x="475" y="557" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="8">past orders · statuses</text>
+<text x="475" y="569" text-anchor="middle" fill="#94A3B8" font-family="Arial,sans-serif" font-size="7">GET /orders</text>
+
+<!-- SubscriptionScreen -->
+<rect x="388" y="595" width="174" height="48" rx="6" fill="#ECFDF5" stroke="#6EE7B7" stroke-width="1" stroke-dasharray="3,2"/>
+<text x="475" y="613" text-anchor="middle" fill="#065F46" font-family="Arial,sans-serif" font-size="9" font-weight="bold">SubscriptionScreen (P1)</text>
+<text x="475" y="626" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="8">weekly / monthly recurring</text>
+<text x="475" y="638" text-anchor="middle" fill="#94A3B8" font-family="Arial,sans-serif" font-size="7">Stripe subscription</text>
+
+<!-- ── COL 4: FUTURE ORDERS (x=582 w=186) ── -->
+<rect x="582" y="268" width="186" height="430" rx="8" fill="#F0FDF4" stroke="#86EFAC" stroke-width="1.5" filter="url(#sh)"/>
+<rect x="582" y="268" width="186" height="26" rx="8" fill="#15803D"/>
+<rect x="582" y="282" width="186" height="12" fill="#15803D"/>
+<text x="675" y="284" text-anchor="middle" fill="white" font-family="Arial,sans-serif" font-size="10" font-weight="bold">FUTURE ORDERS</text>
+<rect x="700" y="271" width="60" height="14" rx="7" fill="#86EFAC"/>
+<text x="730" y="281" text-anchor="middle" fill="#14532D" font-family="Arial,sans-serif" font-size="7" font-weight="bold">P1 FEATURE</text>
+
+<!-- FutureOrderCreateScreen -->
+<rect x="590" y="303" width="170" height="100" rx="6" fill="white" stroke="#86EFAC" stroke-width="1"/>
+<rect x="590" y="303" width="170" height="17" rx="6" fill="#DCFCE7"/>
+<rect x="590" y="312" width="170" height="8" fill="#DCFCE7"/>
+<text x="675" y="315" text-anchor="middle" fill="#15803D" font-family="Arial,sans-serif" font-size="9" font-weight="bold">FutureOrderCreate</text>
+<text x="675" y="331" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="8">"I need 10 oranges in 2 days"</text>
+<text x="675" y="343" text-anchor="middle" fill="#2563EB" font-family="Arial,sans-serif" font-size="8">1. POST /ai/parse-demand</text>
+<text x="675" y="355" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="8">2. Confirmation ActionSheet</text>
+<text x="675" y="367" text-anchor="middle" fill="#064E3B" font-family="Arial,sans-serif" font-size="8">3. POST /future-orders</text>
+<text x="675" y="379" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="8">4. Success toast</text>
+<text x="675" y="396" text-anchor="middle" fill="#94A3B8" font-family="Arial,sans-serif" font-size="7">Demo Scenario 2 start</text>
+
+<!-- FutureOrderListScreen -->
+<rect x="590" y="412" width="170" height="66" rx="6" fill="white" stroke="#86EFAC" stroke-width="1"/>
+<rect x="590" y="412" width="170" height="17" rx="6" fill="#DCFCE7"/>
+<rect x="590" y="421" width="170" height="8" fill="#DCFCE7"/>
+<text x="675" y="424" text-anchor="middle" fill="#15803D" font-family="Arial,sans-serif" font-size="9" font-weight="bold">FutureOrderList</text>
+<text x="675" y="439" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="8">open / matched / expired</text>
+<text x="675" y="451" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="8">swipe-to-cancel</text>
+<text x="675" y="471" text-anchor="middle" fill="#94A3B8" font-family="Arial,sans-serif" font-size="7">GET /future-orders</text>
+
+<!-- Push notification flow -->
+<rect x="590" y="487" width="170" height="80" rx="6" fill="#ECFDF5" stroke="#6EE7B7" stroke-width="1" stroke-dasharray="4,3"/>
+<text x="675" y="504" text-anchor="middle" fill="#065F46" font-family="Arial,sans-serif" font-size="9" font-weight="bold">Push Notification</text>
+<text x="675" y="519" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="8">Producer publishes listing</text>
+<text x="675" y="531" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="8">→ backend fanout matches</text>
+<text x="675" y="543" text-anchor="middle" fill="#064E3B" font-family="Arial,sans-serif" font-size="8">→ FCM / APNs push sent</text>
+<text x="675" y="555" text-anchor="middle" fill="#064E3B" font-family="Arial,sans-serif" font-size="8">→ tap opens listing detail</text>
+<text x="675" y="560" text-anchor="middle" fill="#94A3B8" font-family="Arial,sans-serif" font-size="7">deep link: /listings/:id</text>
+
+<!-- NotificationHistoryScreen -->
+<rect x="590" y="576" width="170" height="48" rx="6" fill="white" stroke="#86EFAC" stroke-width="1"/>
+<text x="675" y="594" text-anchor="middle" fill="#15803D" font-family="Arial,sans-serif" font-size="9" font-weight="bold">NotificationsScreen</text>
+<text x="675" y="607" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="8">match alerts · order updates</text>
+<text x="675" y="619" text-anchor="middle" fill="#94A3B8" font-family="Arial,sans-serif" font-size="7">notification tray</text>
+
+<!-- ── COL 5: PROFILE/PRODUCER (x=780 w=172) ── -->
+<rect x="780" y="268" width="172" height="430" rx="8" fill="#FFF7ED" stroke="#FCD34D" stroke-width="1.5" filter="url(#sh)"/>
+<rect x="780" y="268" width="172" height="26" rx="8" fill="#C2410C"/>
+<rect x="780" y="282" width="172" height="12" fill="#C2410C"/>
+<text x="866" y="284" text-anchor="middle" fill="white" font-family="Arial,sans-serif" font-size="10" font-weight="bold">PROFILE TAB</text>
+
+<!-- ConsumerProfileScreen -->
+<rect x="788" y="303" width="156" height="58" rx="6" fill="white" stroke="#FCD34D" stroke-width="1"/>
+<rect x="788" y="303" width="156" height="17" rx="6" fill="#FEF3C7"/>
+<rect x="788" y="312" width="156" height="8" fill="#FEF3C7"/>
+<text x="866" y="315" text-anchor="middle" fill="#92400E" font-family="Arial,sans-serif" font-size="9" font-weight="bold">ConsumerProfile</text>
+<text x="866" y="330" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="8">name · location · prefs</text>
+<text x="866" y="342" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="8">account settings · logout</text>
+<text x="866" y="354" text-anchor="middle" fill="#94A3B8" font-family="Arial,sans-serif" font-size="7">PATCH /users/me</text>
+
+<!-- ProducerDashboardScreen -->
+<rect x="788" y="370" width="156" height="72" rx="6" fill="white" stroke="#FCD34D" stroke-width="1"/>
+<rect x="788" y="370" width="156" height="17" rx="6" fill="#FEF3C7"/>
+<rect x="788" y="379" width="156" height="8" fill="#FEF3C7"/>
+<text x="866" y="382" text-anchor="middle" fill="#92400E" font-family="Arial,sans-serif" font-size="9" font-weight="bold">ProducerDashboard</text>
+<text x="866" y="397" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="8">my listings · orders</text>
+<text x="866" y="409" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="8">toggle availability</text>
+<text x="866" y="421" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="8">quick publish/unpublish</text>
+<text x="866" y="435" text-anchor="middle" fill="#94A3B8" font-family="Arial,sans-serif" font-size="7">producer role only</text>
+
+<!-- CreateListingScreen -->
+<rect x="788" y="451" width="156" height="66" rx="6" fill="white" stroke="#FCD34D" stroke-width="1"/>
+<rect x="788" y="451" width="156" height="17" rx="6" fill="#FEF3C7"/>
+<rect x="788" y="460" width="156" height="8" fill="#FEF3C7"/>
+<text x="866" y="463" text-anchor="middle" fill="#92400E" font-family="Arial,sans-serif" font-size="9" font-weight="bold">CreateListingScreen</text>
+<text x="866" y="478" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="8">ImagePicker (camera/library)</text>
+<text x="866" y="490" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="8">native form inputs</text>
+<text x="866" y="502" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="8">location auto-fill</text>
+<text x="866" y="510" text-anchor="middle" fill="#94A3B8" font-family="Arial,sans-serif" font-size="7">POST /listings + image</text>
+
+<!-- AdminConfigScreen -->
+<rect x="788" y="526" width="156" height="52" rx="6" fill="#FAF5FF" stroke="#D8B4FE" stroke-width="1"/>
+<rect x="788" y="526" width="156" height="17" rx="6" fill="#F3E8FF"/>
+<rect x="788" y="535" width="156" height="8" fill="#F3E8FF"/>
+<text x="866" y="538" text-anchor="middle" fill="#7E22CE" font-family="Arial,sans-serif" font-size="9" font-weight="bold">AdminConfigScreen</text>
+<text x="866" y="553" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="8">fee % · feature flags</text>
+<text x="866" y="565" text-anchor="middle" fill="#94A3B8" font-family="Arial,sans-serif" font-size="7">operator role only</text>
+
+<!-- Mobile-specific note -->
+<rect x="788" y="587" width="156" height="66" rx="6" fill="#FFFBEB" stroke="#FCD34D" stroke-width="1" stroke-dasharray="3,2"/>
+<text x="866" y="603" text-anchor="middle" fill="#92400E" font-family="Arial,sans-serif" font-size="9" font-weight="bold">Mobile Specifics</text>
+<text x="866" y="616" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="8">expo-location (GPS)</text>
+<text x="866" y="628" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="8">expo-image-picker</text>
+<text x="866" y="640" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="8">expo-notifications</text>
+<text x="866" y="648" text-anchor="middle" fill="#94A3B8" font-family="Arial,sans-serif" font-size="7">expo-secure-store</text>
+
+<!-- ═══════════ SHARED STATE ═══════════ -->
+<rect x="8" y="710" width="944" height="48" rx="8" fill="white" stroke="#CBD5E1" stroke-width="1" filter="url(#sh)"/>
+<text x="22" y="727" fill="#334155" font-family="Arial,sans-serif" font-size="10" font-weight="bold" letter-spacing="0.6">SHARED STATE</text>
+<rect x="16" y="733" width="200" height="18" rx="4" fill="#F1F5F9" stroke="#94A3B8" stroke-width="1"/>
+<text x="116" y="745" text-anchor="middle" fill="#334155" font-family="Arial,sans-serif" font-size="8" font-weight="bold">AuthStore (Zustand + SecureStore)</text>
+<rect x="224" y="733" width="200" height="18" rx="4" fill="#F1F5F9" stroke="#94A3B8" stroke-width="1"/>
+<text x="324" y="745" text-anchor="middle" fill="#334155" font-family="Arial,sans-serif" font-size="8" font-weight="bold">CartStore (Zustand — in-memory)</text>
+<rect x="432" y="733" width="280" height="18" rx="4" fill="#EFF6FF" stroke="#93C5FD" stroke-width="1"/>
+<text x="572" y="745" text-anchor="middle" fill="#1D4ED8" font-family="Arial,sans-serif" font-size="8" font-weight="bold">TanStack Query — server state (same as web, same API)</text>
+<rect x="720" y="733" width="224" height="18" rx="4" fill="#F0FDF4" stroke="#86EFAC" stroke-width="1"/>
+<text x="832" y="745" text-anchor="middle" fill="#15803D" font-family="Arial,sans-serif" font-size="8" font-weight="bold">@community-garden/types — shared TypeScript types</text>
+
+<!-- ═══════════ API CLIENT BRIDGE ═══════════ -->
+<rect x="8" y="768" width="944" height="30" rx="6" fill="#1E3A5F"/>
+<text x="480" y="787" text-anchor="middle" fill="white" font-family="Arial,sans-serif" font-size="11" font-weight="bold">API CLIENT — Same OpenAPI-generated client as web · REST/HTTPS · Bearer JWT · Base: /api/v1</text>
+
+<!-- ═══════════ BACKEND (abbreviated) ═══════════ -->
+<rect x="8" y="808" width="944" height="148" rx="10" fill="url(#backendBg)" filter="url(#sh)"/>
+<text x="22" y="825" fill="#94A3B8" font-family="Arial,sans-serif" font-size="10" font-weight="bold" letter-spacing="0.6">SHARED BACKEND — Node.js · Express · TypeScript (identical to web app)</text>
+
+<!-- Routes abbreviated -->
+<rect x="16" y="833" width="88" height="30" rx="4" fill="#334155" stroke="#475569" stroke-width="1"/>
+<text x="60" y="844" text-anchor="middle" fill="#94A3B8" font-family="Arial,sans-serif" font-size="8">/auth</text>
+<text x="60" y="856" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="7">login · register</text>
+
+<rect x="112" y="833" width="100" height="30" rx="4" fill="#334155" stroke="#475569" stroke-width="1"/>
+<text x="162" y="844" text-anchor="middle" fill="#94A3B8" font-family="Arial,sans-serif" font-size="8">/listings</text>
+<text x="162" y="856" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="7">CRUD · search</text>
+
+<rect x="220" y="833" width="152" height="30" rx="4" fill="#2D1B69" stroke="#7C3AED" stroke-width="1"/>
+<text x="296" y="844" text-anchor="middle" fill="#A78BFA" font-family="Arial,sans-serif" font-size="8">/ai/search · /ai/parse-demand</text>
+<text x="296" y="856" text-anchor="middle" fill="#8B5CF6" font-family="Arial,sans-serif" font-size="7">Claude tool_use</text>
+
+<rect x="380" y="833" width="108" height="30" rx="4" fill="#334155" stroke="#475569" stroke-width="1"/>
+<text x="434" y="844" text-anchor="middle" fill="#94A3B8" font-family="Arial,sans-serif" font-size="8">/orders</text>
+<text x="434" y="856" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="7">create · confirm</text>
+
+<rect x="496" y="833" width="130" height="30" rx="4" fill="#14532D" stroke="#16A34A" stroke-width="1"/>
+<text x="561" y="844" text-anchor="middle" fill="#86EFAC" font-family="Arial,sans-serif" font-size="8">/future-orders</text>
+<text x="561" y="856" text-anchor="middle" fill="#6EE7B7" font-family="Arial,sans-serif" font-size="7">create · fanout</text>
+
+<rect x="634" y="833" width="108" height="30" rx="4" fill="#334155" stroke="#475569" stroke-width="1"/>
+<text x="688" y="844" text-anchor="middle" fill="#94A3B8" font-family="Arial,sans-serif" font-size="8">/subscriptions</text>
+<text x="688" y="856" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="7">create · list</text>
+
+<rect x="750" y="833" width="108" height="30" rx="4" fill="#3B0764" stroke="#9333EA" stroke-width="1"/>
+<text x="804" y="844" text-anchor="middle" fill="#D8B4FE" font-family="Arial,sans-serif" font-size="8">/admin/config</text>
+<text x="804" y="856" text-anchor="middle" fill="#C084FC" font-family="Arial,sans-serif" font-size="7">fee % · flags</text>
+
+<rect x="866" y="833" width="78" height="30" rx="4" fill="#334155" stroke="#475569" stroke-width="1"/>
+<text x="905" y="844" text-anchor="middle" fill="#94A3B8" font-family="Arial,sans-serif" font-size="8">/users</text>
+<text x="905" y="856" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="7">profile</text>
+
+<!-- External services abbreviated -->
+<text x="22" y="878" fill="#4B5563" font-family="Arial,sans-serif" font-size="9">EXTERNAL</text>
+<rect x="16" y="884" width="118" height="26" rx="4" fill="#1E3A5F" stroke="#3B82F6" stroke-width="1"/>
+<text x="75" y="900" text-anchor="middle" fill="#93C5FD" font-family="Arial,sans-serif" font-size="9" font-weight="bold">PostgreSQL 16</text>
+
+<rect x="142" y="884" width="90" height="26" rx="4" fill="#450A0A" stroke="#EF4444" stroke-width="1"/>
+<text x="187" y="900" text-anchor="middle" fill="#FCA5A5" font-family="Arial,sans-serif" font-size="9" font-weight="bold">Redis 7</text>
+
+<rect x="240" y="884" width="148" height="26" rx="4" fill="#2D1B69" stroke="#8B5CF6" stroke-width="1"/>
+<text x="314" y="900" text-anchor="middle" fill="#C4B5FD" font-family="Arial,sans-serif" font-size="9" font-weight="bold">Claude API (Anthropic)</text>
+
+<rect x="396" y="884" width="128" height="26" rx="4" fill="#1A1240" stroke="#6366F1" stroke-width="1"/>
+<text x="460" y="900" text-anchor="middle" fill="#A5B4FC" font-family="Arial,sans-serif" font-size="9" font-weight="bold">Stripe (Sandbox)</text>
+
+<rect x="532" y="884" width="118" height="26" rx="4" fill="#003049" stroke="#0EA5E9" stroke-width="1"/>
+<text x="591" y="900" text-anchor="middle" fill="#7DD3FC" font-family="Arial,sans-serif" font-size="9" font-weight="bold">SendGrid</text>
+
+<rect x="658" y="884" width="90" height="26" rx="4" fill="#1C1917" stroke="#F59E0B" stroke-width="1"/>
+<text x="703" y="900" text-anchor="middle" fill="#FCD34D" font-family="Arial,sans-serif" font-size="9" font-weight="bold">AWS S3</text>
+
+<rect x="756" y="884" width="116" height="26" rx="4" fill="#0C2340" stroke="#06B6D4" stroke-width="1"/>
+<text x="814" y="900" text-anchor="middle" fill="#67E8F9" font-family="Arial,sans-serif" font-size="9" font-weight="bold">Geocoding API</text>
+
+<rect x="880" y="884" width="64" height="26" rx="4" fill="#0F172A" stroke="#374151" stroke-width="1"/>
+<text x="912" y="897" text-anchor="middle" fill="#6B7280" font-family="Arial,sans-serif" font-size="8">FCM</text>
+<text x="912" y="907" text-anchor="middle" fill="#6B7280" font-family="Arial,sans-serif" font-size="8">APNs</text>
+
+<!-- ═══════════ FLOW ARROWS ═══════════ -->
+<line x1="480" y1="698" x2="480" y2="708" stroke="#CBD5E1" stroke-width="1.5" marker-end="url(#arr)"/>
+<line x1="480" y1="758" x2="480" y2="766" stroke="#CBD5E1" stroke-width="1.5" marker-end="url(#arr)"/>
+<line x1="480" y1="798" x2="480" y2="806" stroke="#94A3B8" stroke-width="1.5" marker-end="url(#arr)"/>
+
+<!-- AI flow highlight -->
+<line x1="270" y1="695" x2="296" y2="831" stroke="#7C3AED" stroke-width="1" stroke-dasharray="5,3" opacity="0.35" marker-end="url(#arr)"/>
+<!-- Future orders flow -->
+<line x1="675" y1="695" x2="561" y2="831" stroke="#16A34A" stroke-width="1" stroke-dasharray="5,3" opacity="0.35" marker-end="url(#arrG)"/>
+</svg>

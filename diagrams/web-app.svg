@@ -1,0 +1,418 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="910" viewBox="0 0 1400 910">
+<defs>
+  <linearGradient id="hdr" x1="0%" y1="0%" x2="100%" y2="0%">
+    <stop offset="0%" stop-color="#1E3A5F"/>
+    <stop offset="100%" stop-color="#1B5E3A"/>
+  </linearGradient>
+  <linearGradient id="backendBg" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#1E293B"/>
+    <stop offset="100%" stop-color="#0F172A"/>
+  </linearGradient>
+  <filter id="sh">
+    <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#00000018"/>
+  </filter>
+  <marker id="arr" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+    <polygon points="0 0,8 3,0 6" fill="#64748B"/>
+  </marker>
+  <marker id="arrB" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+    <polygon points="0 0,8 3,0 6" fill="#3B82F6"/>
+  </marker>
+  <marker id="arrG" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+    <polygon points="0 0,8 3,0 6" fill="#16A34A"/>
+  </marker>
+</defs>
+
+<!-- BG -->
+<rect width="1400" height="910" fill="#EEF2F7"/>
+
+<!-- ═══════════ HEADER ═══════════ -->
+<rect width="1400" height="66" fill="url(#hdr)"/>
+<text x="700" y="25" text-anchor="middle" fill="white" font-family="Arial,sans-serif" font-size="19" font-weight="bold" letter-spacing="1.5">COMMUNITY GARDEN — Web Application</text>
+<text x="700" y="50" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-family="Arial,sans-serif" font-size="11">React 18 · TypeScript · Vite · TanStack Query · Zustand · Tailwind CSS · React Router v6</text>
+<rect x="1270" y="16" width="60" height="20" rx="10" fill="rgba(255,255,255,0.18)"/>
+<text x="1300" y="30" text-anchor="middle" fill="white" font-family="Arial,sans-serif" font-size="10">Web App</text>
+<rect x="1338" y="16" width="52" height="20" rx="10" fill="rgba(255,255,255,0.12)"/>
+<text x="1364" y="30" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-family="Arial,sans-serif" font-size="10">v1 MVP</text>
+
+<!-- ═══════════ FRONTEND SECTION ═══════════ -->
+<rect x="8" y="74" width="1384" height="356" rx="10" fill="white" stroke="#CBD5E1" stroke-width="1" filter="url(#sh)"/>
+<text x="22" y="92" fill="#334155" font-family="Arial,sans-serif" font-size="11" font-weight="bold" letter-spacing="0.8">BROWSER — REACT FRONTEND</text>
+<!-- browser dots -->
+<circle cx="1348" cy="86" r="5" fill="#EF4444"/>
+<circle cx="1362" cy="86" r="5" fill="#F59E0B"/>
+<circle cx="1376" cy="86" r="5" fill="#10B981"/>
+
+<!-- ── COL 1: AUTH (x=16 w=148) ── -->
+<rect x="16" y="100" width="148" height="320" rx="8" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1"/>
+<rect x="16" y="100" width="148" height="26" rx="8" fill="#475569"/>
+<rect x="16" y="114" width="148" height="12" rx="0" fill="#475569"/>
+<text x="90" y="117" text-anchor="middle" fill="white" font-family="Arial,sans-serif" font-size="10" font-weight="bold">AUTH &amp; ACCESS</text>
+
+<rect x="24" y="136" width="132" height="66" rx="6" fill="white" stroke="#94A3B8" stroke-width="1"/>
+<rect x="24" y="136" width="132" height="17" rx="6" fill="#E2E8F0"/>
+<rect x="24" y="145" width="132" height="8" fill="#E2E8F0"/>
+<text x="90" y="148" text-anchor="middle" fill="#334155" font-family="Arial,sans-serif" font-size="10" font-weight="bold">LoginPage</text>
+<text x="90" y="163" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="9">email + password</text>
+<text x="90" y="175" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="9">JWT → authStore</text>
+<text x="90" y="195" text-anchor="middle" fill="#94A3B8" font-family="Arial,sans-serif" font-size="8">route: /login</text>
+
+<rect x="24" y="212" width="132" height="66" rx="6" fill="white" stroke="#94A3B8" stroke-width="1"/>
+<rect x="24" y="212" width="132" height="17" rx="6" fill="#E2E8F0"/>
+<rect x="24" y="221" width="132" height="8" fill="#E2E8F0"/>
+<text x="90" y="224" text-anchor="middle" fill="#334155" font-family="Arial,sans-serif" font-size="10" font-weight="bold">RegisterPage</text>
+<text x="90" y="239" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="9">email · password</text>
+<text x="90" y="251" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="9">role selector</text>
+<text x="90" y="271" text-anchor="middle" fill="#94A3B8" font-family="Arial,sans-serif" font-size="8">route: /register</text>
+
+<rect x="24" y="288" width="132" height="56" rx="6" fill="#F1F5F9" stroke="#94A3B8" stroke-width="1" stroke-dasharray="4,3"/>
+<text x="90" y="307" text-anchor="middle" fill="#475569" font-family="Arial,sans-serif" font-size="10" font-weight="bold">ProtectedRoute</text>
+<text x="90" y="320" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="9">role-aware guard</text>
+<text x="90" y="334" text-anchor="middle" fill="#94A3B8" font-family="Arial,sans-serif" font-size="8">redirects /login if unauth</text>
+
+<rect x="24" y="354" width="132" height="52" rx="6" fill="#F1F5F9" stroke="#94A3B8" stroke-width="1" stroke-dasharray="4,3"/>
+<text x="90" y="373" text-anchor="middle" fill="#475569" font-family="Arial,sans-serif" font-size="10" font-weight="bold">ErrorBoundary</text>
+<text x="90" y="386" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="9">global error catch</text>
+<text x="90" y="398" text-anchor="middle" fill="#94A3B8" font-family="Arial,sans-serif" font-size="8">NotFoundPage (404)</text>
+
+<!-- ── COL 2: AI DISCOVERY (x=174 w=272) ── -->
+<rect x="174" y="100" width="272" height="320" rx="8" fill="#EFF6FF" stroke="#93C5FD" stroke-width="1.5"/>
+<rect x="174" y="100" width="272" height="26" rx="8" fill="#1D4ED8"/>
+<rect x="174" y="114" width="272" height="12" fill="#1D4ED8"/>
+<text x="296" y="117" text-anchor="middle" fill="white" font-family="Arial,sans-serif" font-size="10" font-weight="bold">AI-POWERED DISCOVERY</text>
+<rect x="388" y="103" width="50" height="16" rx="8" fill="#FCD34D"/>
+<text x="413" y="114" text-anchor="middle" fill="#78350F" font-family="Arial,sans-serif" font-size="8" font-weight="bold">P0 PRIMARY</text>
+
+<!-- AISearchPage FEATURED -->
+<rect x="182" y="136" width="256" height="95" rx="6" fill="#DBEAFE" stroke="#3B82F6" stroke-width="2"/>
+<rect x="182" y="136" width="256" height="20" rx="6" fill="#2563EB"/>
+<rect x="182" y="148" width="256" height="8" fill="#2563EB"/>
+<text x="302" y="150" text-anchor="middle" fill="white" font-family="Arial,sans-serif" font-size="10" font-weight="bold">★  AISearchPage  (HOME /)</text>
+<rect x="392" y="139" width="38" height="14" rx="7" fill="#FCD34D"/>
+<text x="411" y="149" text-anchor="middle" fill="#78350F" font-family="Arial,sans-serif" font-size="7" font-weight="bold">HOME</text>
+<text x="310" y="170" text-anchor="middle" fill="#1E40AF" font-family="Arial,sans-serif" font-size="10" font-weight="bold">"Find me some zucchini"</text>
+<text x="310" y="184" text-anchor="middle" fill="#2563EB" font-family="Arial,sans-serif" font-size="9">POST /ai/search → ranked listings + explanation</text>
+<text x="310" y="198" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="9">loading skeleton · AI explanation text · ListingCards</text>
+<text x="310" y="222" text-anchor="middle" fill="#94A3B8" font-family="Arial,sans-serif" font-size="8">fallback link: "Try standard search" on API error</text>
+
+<rect x="182" y="242" width="124" height="54" rx="6" fill="white" stroke="#93C5FD" stroke-width="1"/>
+<text x="244" y="260" text-anchor="middle" fill="#1D4ED8" font-family="Arial,sans-serif" font-size="10" font-weight="bold">AISearchBar</text>
+<text x="244" y="273" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="9">shared component</text>
+<text x="244" y="286" text-anchor="middle" fill="#94A3B8" font-family="Arial,sans-serif" font-size="8">persistent in nav header</text>
+
+<rect x="314" y="242" width="124" height="54" rx="6" fill="white" stroke="#93C5FD" stroke-width="1"/>
+<text x="376" y="260" text-anchor="middle" fill="#1D4ED8" font-family="Arial,sans-serif" font-size="10" font-weight="bold">ListingsPage</text>
+<text x="376" y="273" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="9">keyword fallback</text>
+<text x="376" y="286" text-anchor="middle" fill="#94A3B8" font-family="Arial,sans-serif" font-size="8">ZIP + radius slider</text>
+
+<rect x="182" y="306" width="256" height="44" rx="6" fill="white" stroke="#93C5FD" stroke-width="1"/>
+<text x="310" y="323" text-anchor="middle" fill="#1D4ED8" font-family="Arial,sans-serif" font-size="10" font-weight="bold">ListingCard  (shared component)</text>
+<text x="310" y="337" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="9">title · price · distance · image · "Add to Cart" · reused in AI + browse</text>
+<text x="310" y="349" text-anchor="middle" fill="#94A3B8" font-family="Arial,sans-serif" font-size="8">route: /listings/:id  →  ListingDetailPage</text>
+
+<!-- ── COL 3: COMMERCE (x=456 w=224) ── -->
+<rect x="456" y="100" width="224" height="320" rx="8" fill="#F0FDF4" stroke="#6EE7B7" stroke-width="1.5"/>
+<rect x="456" y="100" width="224" height="26" rx="8" fill="#065F46"/>
+<rect x="456" y="114" width="224" height="12" fill="#065F46"/>
+<text x="568" y="117" text-anchor="middle" fill="white" font-family="Arial,sans-serif" font-size="10" font-weight="bold">CONSUMER COMMERCE</text>
+
+<rect x="464" y="136" width="208" height="60" rx="6" fill="white" stroke="#6EE7B7" stroke-width="1"/>
+<rect x="464" y="136" width="208" height="17" rx="6" fill="#D1FAE5"/>
+<rect x="464" y="145" width="208" height="8" fill="#D1FAE5"/>
+<text x="568" y="148" text-anchor="middle" fill="#065F46" font-family="Arial,sans-serif" font-size="10" font-weight="bold">ListingDetailPage</text>
+<text x="568" y="163" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="9">full info · producer details</text>
+<text x="568" y="175" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="9">Add to Cart / Subscribe / Barter</text>
+<text x="568" y="190" text-anchor="middle" fill="#94A3B8" font-family="Arial,sans-serif" font-size="8">route: /listings/:id</text>
+
+<rect x="464" y="206" width="208" height="56" rx="6" fill="white" stroke="#6EE7B7" stroke-width="1"/>
+<rect x="464" y="206" width="208" height="17" rx="6" fill="#D1FAE5"/>
+<rect x="464" y="215" width="208" height="8" fill="#D1FAE5"/>
+<text x="568" y="218" text-anchor="middle" fill="#065F46" font-family="Arial,sans-serif" font-size="10" font-weight="bold">CartPage</text>
+<text x="568" y="233" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="9">items · subtotal</text>
+<text x="568" y="245" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="9">estimated platform fee %</text>
+<text x="568" y="256" text-anchor="middle" fill="#94A3B8" font-family="Arial,sans-serif" font-size="8">route: /cart</text>
+
+<rect x="464" y="272" width="208" height="56" rx="6" fill="white" stroke="#6EE7B7" stroke-width="1"/>
+<rect x="464" y="272" width="208" height="17" rx="6" fill="#D1FAE5"/>
+<rect x="464" y="281" width="208" height="8" fill="#D1FAE5"/>
+<text x="568" y="284" text-anchor="middle" fill="#065F46" font-family="Arial,sans-serif" font-size="10" font-weight="bold">CheckoutPage</text>
+<text x="568" y="299" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="9">Stripe PaymentElement</text>
+<text x="568" y="311" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="9">@stripe/react-stripe-js</text>
+<text x="568" y="322" text-anchor="middle" fill="#94A3B8" font-family="Arial,sans-serif" font-size="8">route: /checkout</text>
+
+<rect x="464" y="338" width="208" height="72" rx="6" fill="white" stroke="#6EE7B7" stroke-width="1"/>
+<rect x="464" y="338" width="208" height="17" rx="6" fill="#D1FAE5"/>
+<rect x="464" y="347" width="208" height="8" fill="#D1FAE5"/>
+<text x="568" y="350" text-anchor="middle" fill="#065F46" font-family="Arial,sans-serif" font-size="10" font-weight="bold">OrderConfirmationPage</text>
+<text x="568" y="366" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="9">subtotal · platform fee · total</text>
+<text x="568" y="378" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="9">fee shown as explicit line item</text>
+<text x="568" y="390" text-anchor="middle" fill="#94A3B8" font-family="Arial,sans-serif" font-size="8">route: /orders/:id/confirmation</text>
+<text x="568" y="402" text-anchor="middle" fill="#94A3B8" font-family="Arial,sans-serif" font-size="8">Demo Scenario 1 endpoint</text>
+
+<!-- ── COL 4: FUTURE ORDERS (x=690 w=212) ── -->
+<rect x="690" y="100" width="212" height="320" rx="8" fill="#F0FDF4" stroke="#86EFAC" stroke-width="1.5"/>
+<rect x="690" y="100" width="212" height="26" rx="8" fill="#15803D"/>
+<rect x="690" y="114" width="212" height="12" fill="#15803D"/>
+<text x="796" y="117" text-anchor="middle" fill="white" font-family="Arial,sans-serif" font-size="10" font-weight="bold">FUTURE ORDERS</text>
+<rect x="840" y="103" width="54" height="16" rx="8" fill="#86EFAC"/>
+<text x="867" y="114" text-anchor="middle" fill="#14532D" font-family="Arial,sans-serif" font-size="8" font-weight="bold">P1 FEATURE</text>
+
+<rect x="698" y="136" width="196" height="96" rx="6" fill="white" stroke="#86EFAC" stroke-width="1"/>
+<rect x="698" y="136" width="196" height="17" rx="6" fill="#DCFCE7"/>
+<rect x="698" y="145" width="196" height="8" fill="#DCFCE7"/>
+<text x="796" y="148" text-anchor="middle" fill="#15803D" font-family="Arial,sans-serif" font-size="10" font-weight="bold">FutureOrderPage</text>
+<text x="796" y="165" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="9">"I need 10 oranges in 2 days"</text>
+<text x="796" y="178" text-anchor="middle" fill="#2563EB" font-family="Arial,sans-serif" font-size="9">1. POST /ai/parse-demand</text>
+<text x="796" y="191" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="9">2. Show parsed intent to confirm</text>
+<text x="796" y="204" text-anchor="middle" fill="#064E3B" font-family="Arial,sans-serif" font-size="9">3. POST /future-orders → open</text>
+<text x="796" y="224" text-anchor="middle" fill="#94A3B8" font-family="Arial,sans-serif" font-size="8">route: /future-orders/new</text>
+
+<rect x="698" y="242" width="196" height="58" rx="6" fill="white" stroke="#86EFAC" stroke-width="1"/>
+<rect x="698" y="242" width="196" height="17" rx="6" fill="#DCFCE7"/>
+<rect x="698" y="251" width="196" height="8" fill="#DCFCE7"/>
+<text x="796" y="254" text-anchor="middle" fill="#15803D" font-family="Arial,sans-serif" font-size="10" font-weight="bold">FutureOrdersListPage</text>
+<text x="796" y="270" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="9">open · matched · expired badges</text>
+<text x="796" y="283" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="9">cancel demand action</text>
+<text x="796" y="293" text-anchor="middle" fill="#94A3B8" font-family="Arial,sans-serif" font-size="8">route: /future-orders</text>
+
+<rect x="698" y="310" width="196" height="70" rx="6" fill="#ECFDF5" stroke="#6EE7B7" stroke-width="1" stroke-dasharray="4,3"/>
+<text x="796" y="330" text-anchor="middle" fill="#065F46" font-family="Arial,sans-serif" font-size="10" font-weight="bold">Match Notification Flow</text>
+<text x="796" y="345" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="9">Producer publishes listing</text>
+<text x="796" y="358" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="9">→ fanout job matches demand</text>
+<text x="796" y="371" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="9">→ SendGrid email to consumer</text>
+<text x="796" y="375" text-anchor="middle" fill="#94A3B8" font-family="Arial,sans-serif" font-size="8">Demo Scenario 2 endpoint</text>
+
+<!-- ── COL 5: PRODUCER (x=912 w=224) ── -->
+<rect x="912" y="100" width="224" height="320" rx="8" fill="#FFF7ED" stroke="#FCD34D" stroke-width="1.5"/>
+<rect x="912" y="100" width="224" height="26" rx="8" fill="#C2410C"/>
+<rect x="912" y="114" width="224" height="12" fill="#C2410C"/>
+<text x="1024" y="117" text-anchor="middle" fill="white" font-family="Arial,sans-serif" font-size="10" font-weight="bold">PRODUCER TOOLS</text>
+
+<rect x="920" y="136" width="208" height="64" rx="6" fill="white" stroke="#FCD34D" stroke-width="1"/>
+<rect x="920" y="136" width="208" height="17" rx="6" fill="#FEF3C7"/>
+<rect x="920" y="145" width="208" height="8" fill="#FEF3C7"/>
+<text x="1024" y="148" text-anchor="middle" fill="#92400E" font-family="Arial,sans-serif" font-size="10" font-weight="bold">ProducerDashboard</text>
+<text x="1024" y="163" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="9">listings table · order history</text>
+<text x="1024" y="175" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="9">publish / unpublish controls</text>
+<text x="1024" y="193" text-anchor="middle" fill="#94A3B8" font-family="Arial,sans-serif" font-size="8">route: /dashboard</text>
+
+<rect x="920" y="210" width="208" height="70" rx="6" fill="white" stroke="#FCD34D" stroke-width="1"/>
+<rect x="920" y="210" width="208" height="17" rx="6" fill="#FEF3C7"/>
+<rect x="920" y="219" width="208" height="8" fill="#FEF3C7"/>
+<text x="1024" y="222" text-anchor="middle" fill="#92400E" font-family="Arial,sans-serif" font-size="10" font-weight="bold">CreateListingPage</text>
+<text x="1024" y="237" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="9">react-hook-form + zod</text>
+<text x="1024" y="249" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="9">image drag-and-drop upload</text>
+<text x="1024" y="261" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="9">category · price · ZIP · qty</text>
+<text x="1024" y="273" text-anchor="middle" fill="#94A3B8" font-family="Arial,sans-serif" font-size="8">route: /listings/new</text>
+
+<rect x="920" y="290" width="100" height="56" rx="6" fill="white" stroke="#FCD34D" stroke-width="1"/>
+<text x="970" y="308" text-anchor="middle" fill="#92400E" font-family="Arial,sans-serif" font-size="10" font-weight="bold">EditListing</text>
+<text x="970" y="321" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="9">Page</text>
+<text x="970" y="338" text-anchor="middle" fill="#94A3B8" font-family="Arial,sans-serif" font-size="8">/listings/:id/edit</text>
+
+<rect x="1028" y="290" width="100" height="56" rx="6" fill="white" stroke="#FCD34D" stroke-width="1"/>
+<text x="1078" y="308" text-anchor="middle" fill="#92400E" font-family="Arial,sans-serif" font-size="10" font-weight="bold">Subscription</text>
+<text x="1078" y="321" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="9">Modal (P1)</text>
+<text x="1078" y="338" text-anchor="middle" fill="#94A3B8" font-family="Arial,sans-serif" font-size="8">weekly / monthly</text>
+
+<!-- ── COL 6: ADMIN (x=1146 w=238) ── -->
+<rect x="1146" y="100" width="238" height="320" rx="8" fill="#FDF4FF" stroke="#D8B4FE" stroke-width="1.5"/>
+<rect x="1146" y="100" width="238" height="26" rx="8" fill="#7E22CE"/>
+<rect x="1146" y="114" width="238" height="12" fill="#7E22CE"/>
+<text x="1265" y="117" text-anchor="middle" fill="white" font-family="Arial,sans-serif" font-size="10" font-weight="bold">ADMIN &amp; PLATFORM</text>
+
+<rect x="1154" y="136" width="222" height="68" rx="6" fill="white" stroke="#D8B4FE" stroke-width="1"/>
+<rect x="1154" y="136" width="222" height="17" rx="6" fill="#F3E8FF"/>
+<rect x="1154" y="145" width="222" height="8" fill="#F3E8FF"/>
+<text x="1265" y="148" text-anchor="middle" fill="#7E22CE" font-family="Arial,sans-serif" font-size="10" font-weight="bold">AdminConfigPage</text>
+<text x="1265" y="163" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="9">platform fee % (5–10%)</text>
+<text x="1265" y="175" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="9">feature flags · operator only</text>
+<text x="1265" y="196" text-anchor="middle" fill="#94A3B8" font-family="Arial,sans-serif" font-size="8">route: /admin/config</text>
+
+<rect x="1154" y="214" width="107" height="52" rx="6" fill="#FAF5FF" stroke="#D8B4FE" stroke-width="1" stroke-dasharray="4,3"/>
+<text x="1207" y="232" text-anchor="middle" fill="#7E22CE" font-family="Arial,sans-serif" font-size="10" font-weight="bold">Broker</text>
+<text x="1207" y="245" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="9">Dashboard P1</text>
+<text x="1207" y="258" text-anchor="middle" fill="#94A3B8" font-family="Arial,sans-serif" font-size="8">multi-producer basket</text>
+
+<rect x="1269" y="214" width="107" height="52" rx="6" fill="#FAF5FF" stroke="#D8B4FE" stroke-width="1" stroke-dasharray="4,3"/>
+<text x="1322" y="232" text-anchor="middle" fill="#7E22CE" font-family="Arial,sans-serif" font-size="10" font-weight="bold">Exchange</text>
+<text x="1322" y="245" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="9">Page P2 stub</text>
+<text x="1322" y="258" text-anchor="middle" fill="#94A3B8" font-family="Arial,sans-serif" font-size="8">barter flow</text>
+
+<rect x="1154" y="276" width="222" height="50" rx="6" fill="#FAF5FF" stroke="#D8B4FE" stroke-width="1"/>
+<text x="1265" y="296" text-anchor="middle" fill="#7E22CE" font-family="Arial,sans-serif" font-size="10" font-weight="bold">SubscriptionPage (P1)</text>
+<text x="1265" y="310" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="9">weekly · biweekly · monthly</text>
+<text x="1265" y="320" text-anchor="middle" fill="#94A3B8" font-family="Arial,sans-serif" font-size="8">route: /subscriptions</text>
+
+<rect x="1154" y="336" width="222" height="44" rx="6" fill="white" stroke="#D8B4FE" stroke-width="1"/>
+<text x="1265" y="354" text-anchor="middle" fill="#7E22CE" font-family="Arial,sans-serif" font-size="10" font-weight="bold">Loading Skeletons</text>
+<text x="1265" y="368" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="9">all data-fetching pages · CLS-free</text>
+
+<!-- ═══════════ STATE MANAGEMENT ═══════════ -->
+<rect x="8" y="442" width="1384" height="55" rx="8" fill="white" stroke="#CBD5E1" stroke-width="1" filter="url(#sh)"/>
+<text x="22" y="458" fill="#334155" font-family="Arial,sans-serif" font-size="10" font-weight="bold" letter-spacing="0.8">STATE MANAGEMENT</text>
+<rect x="16" y="463" width="210" height="26" rx="5" fill="#F1F5F9" stroke="#94A3B8" stroke-width="1"/>
+<text x="121" y="480" text-anchor="middle" fill="#334155" font-family="Arial,sans-serif" font-size="9" font-weight="bold">AuthStore  (Zustand + localStorage)</text>
+<rect x="234" y="463" width="210" height="26" rx="5" fill="#F1F5F9" stroke="#94A3B8" stroke-width="1"/>
+<text x="339" y="480" text-anchor="middle" fill="#334155" font-family="Arial,sans-serif" font-size="9" font-weight="bold">CartStore  (Zustand — session)</text>
+<rect x="452" y="463" width="500" height="26" rx="5" fill="#EFF6FF" stroke="#93C5FD" stroke-width="1"/>
+<text x="702" y="480" text-anchor="middle" fill="#1D4ED8" font-family="Arial,sans-serif" font-size="9" font-weight="bold">TanStack Query Cache — server state (listings · orders · future-orders · config)</text>
+<rect x="960" y="463" width="424" height="26" rx="5" fill="#F0FDF4" stroke="#86EFAC" stroke-width="1"/>
+<text x="1172" y="480" text-anchor="middle" fill="#15803D" font-family="Arial,sans-serif" font-size="9" font-weight="bold">@community-garden/types  —  Shared TypeScript types (generated from openapi.yaml)</text>
+
+<!-- ═══════════ API CLIENT BRIDGE ═══════════ -->
+<rect x="8" y="507" width="1384" height="34" rx="6" fill="#1E3A5F"/>
+<text x="700" y="528" text-anchor="middle" fill="white" font-family="Arial,sans-serif" font-size="11" font-weight="bold">API CLIENT  ·  REST over HTTPS  ·  Bearer JWT  ·  Generated from openapi.yaml  ·  Base: /api/v1</text>
+
+<!-- ═══════════ BACKEND ═══════════ -->
+<rect x="8" y="551" width="1384" height="228" rx="10" fill="url(#backendBg)" filter="url(#sh)"/>
+<text x="22" y="569" fill="#94A3B8" font-family="Arial,sans-serif" font-size="10" font-weight="bold" letter-spacing="0.8">BACKEND — Node.js · Express · TypeScript</text>
+<text x="22" y="585" fill="#4B5563" font-family="Arial,sans-serif" font-size="9">ROUTES</text>
+
+<!-- Route boxes -->
+<rect x="16" y="591" width="98" height="35" rx="4" fill="#334155" stroke="#475569" stroke-width="1"/>
+<text x="65" y="604" text-anchor="middle" fill="#94A3B8" font-family="Arial,sans-serif" font-size="9" font-weight="bold">/auth</text>
+<text x="65" y="618" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="8">register·login·refresh</text>
+
+<rect x="122" y="591" width="128" height="35" rx="4" fill="#334155" stroke="#475569" stroke-width="1"/>
+<text x="186" y="604" text-anchor="middle" fill="#94A3B8" font-family="Arial,sans-serif" font-size="9" font-weight="bold">/listings</text>
+<text x="186" y="618" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="8">CRUD · publish · search</text>
+
+<rect x="258" y="591" width="168" height="35" rx="4" fill="#2D1B69" stroke="#7C3AED" stroke-width="1"/>
+<text x="342" y="604" text-anchor="middle" fill="#A78BFA" font-family="Arial,sans-serif" font-size="9" font-weight="bold">/ai/search  ·  /ai/parse-demand</text>
+<text x="342" y="618" text-anchor="middle" fill="#8B5CF6" font-family="Arial,sans-serif" font-size="8">Claude tool_use · rate 20/hr</text>
+
+<rect x="434" y="591" width="130" height="35" rx="4" fill="#334155" stroke="#475569" stroke-width="1"/>
+<text x="499" y="604" text-anchor="middle" fill="#94A3B8" font-family="Arial,sans-serif" font-size="9" font-weight="bold">/orders</text>
+<text x="499" y="618" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="8">create · confirm · list</text>
+
+<rect x="572" y="591" width="152" height="35" rx="4" fill="#14532D" stroke="#16A34A" stroke-width="1"/>
+<text x="648" y="604" text-anchor="middle" fill="#86EFAC" font-family="Arial,sans-serif" font-size="9" font-weight="bold">/future-orders</text>
+<text x="648" y="618" text-anchor="middle" fill="#6EE7B7" font-family="Arial,sans-serif" font-size="8">create · list · cancel</text>
+
+<rect x="732" y="591" width="136" height="35" rx="4" fill="#334155" stroke="#475569" stroke-width="1"/>
+<text x="800" y="604" text-anchor="middle" fill="#94A3B8" font-family="Arial,sans-serif" font-size="9" font-weight="bold">/subscriptions</text>
+<text x="800" y="618" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="8">create · list · update</text>
+
+<rect x="876" y="591" width="128" height="35" rx="4" fill="#334155" stroke="#475569" stroke-width="1"/>
+<text x="940" y="604" text-anchor="middle" fill="#94A3B8" font-family="Arial,sans-serif" font-size="9" font-weight="bold">/exchanges</text>
+<text x="940" y="618" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="8">create · accept · decline</text>
+
+<rect x="1012" y="591" width="140" height="35" rx="4" fill="#3B0764" stroke="#9333EA" stroke-width="1"/>
+<text x="1082" y="604" text-anchor="middle" fill="#D8B4FE" font-family="Arial,sans-serif" font-size="9" font-weight="bold">/admin/config</text>
+<text x="1082" y="618" text-anchor="middle" fill="#C084FC" font-family="Arial,sans-serif" font-size="8">fee % · feature flags</text>
+
+<rect x="1160" y="591" width="96" height="35" rx="4" fill="#334155" stroke="#475569" stroke-width="1"/>
+<text x="1208" y="604" text-anchor="middle" fill="#94A3B8" font-family="Arial,sans-serif" font-size="9" font-weight="bold">/users</text>
+<text x="1208" y="618" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="8">GET·PATCH /me</text>
+
+<rect x="1264" y="591" width="120" height="35" rx="4" fill="#1E293B" stroke="#334155" stroke-width="1"/>
+<text x="1324" y="603" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="8">middleware:</text>
+<text x="1324" y="614" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="8">auth · authorize</text>
+<text x="1324" y="624" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="8">rate-limit · errors</text>
+
+<!-- Services row -->
+<text x="22" y="644" fill="#4B5563" font-family="Arial,sans-serif" font-size="9">SERVICES</text>
+<rect x="16" y="650" width="140" height="38" rx="4" fill="#0F172A" stroke="#334155" stroke-width="1"/>
+<text x="86" y="664" text-anchor="middle" fill="#94A3B8" font-family="Arial,sans-serif" font-size="9" font-weight="bold">AuthService</text>
+<text x="86" y="679" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="8">bcrypt · JWT · refresh</text>
+
+<rect x="164" y="650" width="148" height="38" rx="4" fill="#0F172A" stroke="#334155" stroke-width="1"/>
+<text x="238" y="664" text-anchor="middle" fill="#94A3B8" font-family="Arial,sans-serif" font-size="9" font-weight="bold">ListingService</text>
+<text x="238" y="679" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="8">CRUD · image · search</text>
+
+<rect x="320" y="650" width="120" height="38" rx="4" fill="#0F172A" stroke="#334155" stroke-width="1"/>
+<text x="380" y="664" text-anchor="middle" fill="#94A3B8" font-family="Arial,sans-serif" font-size="9" font-weight="bold">GeoService</text>
+<text x="380" y="679" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="8">ZIP→lat/lng · Haversine</text>
+
+<rect x="448" y="650" width="172" height="38" rx="4" fill="#2D1B69" stroke="#7C3AED" stroke-width="1"/>
+<text x="534" y="664" text-anchor="middle" fill="#A78BFA" font-family="Arial,sans-serif" font-size="9" font-weight="bold">AISearchService</text>
+<text x="534" y="679" text-anchor="middle" fill="#8B5CF6" font-family="Arial,sans-serif" font-size="8">Claude tool_use · search intent</text>
+
+<rect x="628" y="650" width="172" height="38" rx="4" fill="#2D1B69" stroke="#7C3AED" stroke-width="1"/>
+<text x="714" y="664" text-anchor="middle" fill="#A78BFA" font-family="Arial,sans-serif" font-size="9" font-weight="bold">DemandParseService</text>
+<text x="714" y="679" text-anchor="middle" fill="#8B5CF6" font-family="Arial,sans-serif" font-size="8">Claude tool_use · demand intent</text>
+
+<rect x="808" y="650" width="130" height="38" rx="4" fill="#0F172A" stroke="#334155" stroke-width="1"/>
+<text x="873" y="664" text-anchor="middle" fill="#94A3B8" font-family="Arial,sans-serif" font-size="9" font-weight="bold">FeeService</text>
+<text x="873" y="679" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="8">floor() · server-side only</text>
+
+<rect x="946" y="650" width="172" height="38" rx="4" fill="#14532D" stroke="#16A34A" stroke-width="1"/>
+<text x="1032" y="664" text-anchor="middle" fill="#86EFAC" font-family="Arial,sans-serif" font-size="9" font-weight="bold">FutureOrderService</text>
+<text x="1032" y="679" text-anchor="middle" fill="#6EE7B7" font-family="Arial,sans-serif" font-size="8">match · proximity · fanout</text>
+
+<rect x="1126" y="650" width="172" height="38" rx="4" fill="#0F172A" stroke="#334155" stroke-width="1"/>
+<text x="1212" y="664" text-anchor="middle" fill="#94A3B8" font-family="Arial,sans-serif" font-size="9" font-weight="bold">NotificationService</text>
+<text x="1212" y="679" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="8">SendGrid · email alerts</text>
+
+<!-- Jobs row -->
+<text x="22" y="704" fill="#4B5563" font-family="Arial,sans-serif" font-size="9">BACKGROUND JOBS</text>
+<rect x="16" y="710" width="310" height="28" rx="4" fill="#14532D" stroke="#16A34A" stroke-width="1"/>
+<text x="171" y="728" text-anchor="middle" fill="#86EFAC" font-family="Arial,sans-serif" font-size="9" font-weight="bold">listingPublishFanout  —  fires on listing status → active  (setImmediate)</text>
+<rect x="334" y="710" width="200" height="28" rx="4" fill="#0F172A" stroke="#334155" stroke-width="1"/>
+<text x="434" y="728" text-anchor="middle" fill="#4B5563" font-family="Arial,sans-serif" font-size="9">Subscription Billing Job (P1 stub)</text>
+<rect x="542" y="710" width="180" height="28" rx="4" fill="#0F172A" stroke="#334155" stroke-width="1"/>
+<text x="632" y="728" text-anchor="middle" fill="#4B5563" font-family="Arial,sans-serif" font-size="9">Token Cleanup Job (Redis TTL)</text>
+
+<!-- ═══════════ EXTERNAL SERVICES ═══════════ -->
+<rect x="8" y="791" width="1384" height="102" rx="10" fill="#0F172A" filter="url(#sh)"/>
+<text x="22" y="808" fill="#4B5563" font-family="Arial,sans-serif" font-size="10" font-weight="bold" letter-spacing="0.8">EXTERNAL SERVICES</text>
+
+<rect x="16" y="815" width="168" height="68" rx="6" fill="#1E3A5F" stroke="#3B82F6" stroke-width="1.5"/>
+<text x="100" y="834" text-anchor="middle" fill="#93C5FD" font-family="Arial,sans-serif" font-size="11" font-weight="bold">PostgreSQL 16</text>
+<text x="100" y="849" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="9">Primary database</text>
+<text x="100" y="862" text-anchor="middle" fill="#4B5563" font-family="Arial,sans-serif" font-size="8">7 tables · FK constraints</text>
+<text x="100" y="875" text-anchor="middle" fill="#4B5563" font-family="Arial,sans-serif" font-size="8">indexes on status · ZIP · producer_id</text>
+
+<rect x="192" y="815" width="148" height="68" rx="6" fill="#450A0A" stroke="#EF4444" stroke-width="1.5"/>
+<text x="266" y="834" text-anchor="middle" fill="#FCA5A5" font-family="Arial,sans-serif" font-size="11" font-weight="bold">Redis 7</text>
+<text x="266" y="849" text-anchor="middle" fill="#64748B" font-family="Arial,sans-serif" font-size="9">Cache + rate limiter</text>
+<text x="266" y="862" text-anchor="middle" fill="#4B5563" font-family="Arial,sans-serif" font-size="8">ZIP geocode cache (24h TTL)</text>
+<text x="266" y="875" text-anchor="middle" fill="#4B5563" font-family="Arial,sans-serif" font-size="8">refresh token store</text>
+
+<rect x="348" y="815" width="210" height="68" rx="6" fill="#2D1B69" stroke="#8B5CF6" stroke-width="1.5"/>
+<text x="453" y="834" text-anchor="middle" fill="#C4B5FD" font-family="Arial,sans-serif" font-size="11" font-weight="bold">Claude API (Anthropic)</text>
+<text x="453" y="849" text-anchor="middle" fill="#8B5CF6" font-family="Arial,sans-serif" font-size="9">tool_use function calling</text>
+<text x="453" y="862" text-anchor="middle" fill="#7C3AED" font-family="Arial,sans-serif" font-size="8">search intent extraction</text>
+<text x="453" y="875" text-anchor="middle" fill="#7C3AED" font-family="Arial,sans-serif" font-size="8">demand parsing · prompt cache</text>
+
+<rect x="566" y="815" width="180" height="68" rx="6" fill="#1A1240" stroke="#6366F1" stroke-width="1.5"/>
+<text x="656" y="834" text-anchor="middle" fill="#A5B4FC" font-family="Arial,sans-serif" font-size="11" font-weight="bold">Stripe (Sandbox)</text>
+<text x="656" y="849" text-anchor="middle" fill="#818CF8" font-family="Arial,sans-serif" font-size="9">PaymentIntent · Subscription</text>
+<text x="656" y="862" text-anchor="middle" fill="#6366F1" font-family="Arial,sans-serif" font-size="8">application_fee_amount</text>
+<text x="656" y="875" text-anchor="middle" fill="#6366F1" font-family="Arial,sans-serif" font-size="8">test card: 4242 4242 4242 4242</text>
+
+<rect x="754" y="815" width="165" height="68" rx="6" fill="#003049" stroke="#0EA5E9" stroke-width="1.5"/>
+<text x="836" y="834" text-anchor="middle" fill="#7DD3FC" font-family="Arial,sans-serif" font-size="11" font-weight="bold">SendGrid</text>
+<text x="836" y="849" text-anchor="middle" fill="#38BDF8" font-family="Arial,sans-serif" font-size="9">Transactional email</text>
+<text x="836" y="862" text-anchor="middle" fill="#0EA5E9" font-family="Arial,sans-serif" font-size="8">order confirmation</text>
+<text x="836" y="875" text-anchor="middle" fill="#0EA5E9" font-family="Arial,sans-serif" font-size="8">future order match alert</text>
+
+<rect x="927" y="815" width="155" height="68" rx="6" fill="#1C1917" stroke="#F59E0B" stroke-width="1.5"/>
+<text x="1004" y="834" text-anchor="middle" fill="#FCD34D" font-family="Arial,sans-serif" font-size="11" font-weight="bold">AWS S3</text>
+<text x="1004" y="849" text-anchor="middle" fill="#D97706" font-family="Arial,sans-serif" font-size="9">Listing image storage</text>
+<text x="1004" y="862" text-anchor="middle" fill="#92400E" font-family="Arial,sans-serif" font-size="8">multer (local dev)</text>
+<text x="1004" y="875" text-anchor="middle" fill="#92400E" font-family="Arial,sans-serif" font-size="8">presigned URLs · CDN</text>
+
+<rect x="1090" y="815" width="165" height="68" rx="6" fill="#0C2340" stroke="#06B6D4" stroke-width="1.5"/>
+<text x="1172" y="834" text-anchor="middle" fill="#67E8F9" font-family="Arial,sans-serif" font-size="11" font-weight="bold">Geocoding API</text>
+<text x="1172" y="849" text-anchor="middle" fill="#22D3EE" font-family="Arial,sans-serif" font-size="9">Zippopotam.us</text>
+<text x="1172" y="862" text-anchor="middle" fill="#0891B2" font-family="Arial,sans-serif" font-size="8">ZIP → lat/lng</text>
+<text x="1172" y="875" text-anchor="middle" fill="#0891B2" font-family="Arial,sans-serif" font-size="8">Haversine (server-side)</text>
+
+<rect x="1263" y="815" width="121" height="68" rx="6" fill="#111827" stroke="#374151" stroke-width="1"/>
+<text x="1323" y="831" text-anchor="middle" fill="#6B7280" font-family="Arial,sans-serif" font-size="9">Docker Compose</text>
+<text x="1323" y="844" text-anchor="middle" fill="#4B5563" font-family="Arial,sans-serif" font-size="8">Postgres + Redis</text>
+<text x="1323" y="857" text-anchor="middle" fill="#4B5563" font-family="Arial,sans-serif" font-size="8">local dev env</text>
+<text x="1323" y="870" text-anchor="middle" fill="#4B5563" font-family="Arial,sans-serif" font-size="8">CI: GitHub Actions</text>
+
+<!-- ═══════════ FLOW ARROWS ═══════════ -->
+<line x1="700" y1="430" x2="700" y2="440" stroke="#CBD5E1" stroke-width="1.5" marker-end="url(#arr)"/>
+<line x1="700" y1="497" x2="700" y2="505" stroke="#CBD5E1" stroke-width="1.5" marker-end="url(#arr)"/>
+<line x1="700" y1="541" x2="700" y2="549" stroke="#94A3B8" stroke-width="1.5" marker-end="url(#arr)"/>
+<line x1="700" y1="779" x2="700" y2="789" stroke="#475569" stroke-width="1.5" marker-end="url(#arr)"/>
+<!-- AI highlight flow -->
+<line x1="310" y1="430" x2="342" y2="549" stroke="#7C3AED" stroke-width="1" stroke-dasharray="5,3" opacity="0.4" marker-end="url(#arr)"/>
+<!-- Future orders highlight flow -->
+<line x1="796" y1="430" x2="648" y2="549" stroke="#16A34A" stroke-width="1" stroke-dasharray="5,3" opacity="0.4" marker-end="url(#arrG)"/>
+</svg>
