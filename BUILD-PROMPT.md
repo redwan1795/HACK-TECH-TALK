@@ -15,13 +15,15 @@ You are building **Community Garden**, a **web + mobile** marketplace connecting
 
 **Consumers**
 
-- **Individual:** buy, **exchange** (team-defined rules), or **subscribe** to recurring consumption from **multiple** producers. Matching uses **proximity** + consumption patterns; include **AI + natural-language prompt** to turn user text into structured preferences and suggest nearby producers with short rationales.
+- **Individual:** buy, **exchange** (team-defined rules), or **subscribe** to recurring consumption from **multiple** producers. Matching uses **proximity** + consumption patterns.
+- **AI natural-language search (P0):** The primary search interface. Consumer types a plain prompt ("Find me some zucchini") → LLM extracts product + constraints → returns available listings from nearby producers ranked by proximity. No form fields required.
+- **Future Order / demand signal (P1):** Consumer states a future need with quantity and time window ("I need 10 oranges in the next 2 days within 20 miles"). System stores the open demand. When a producer within the proximity publishes a matching listing before the deadline, the consumer is notified immediately.
 - **Broker:** third party who buys from individuals and resells to markets/restaurants/suppliers; **their responsibility**; separate UX from retail.
 
 **Monetization:** platform takes **5%–10%** of each **monetary** transaction (configurable; show as line item).
 
 **Stretch:** small-scale financing via **third-party lender** apps; **mentors** paid when a new farmer hits a **success story** milestone (stub OK for demo).
 
-**Hackathon priorities:** auth + roles, listings, browse/search by location, checkout with visible platform fee, one AI-assisted discovery flow, responsive web + mobile-friendly or shared API. Defer full subscription billing, full compliance, and real lending to stubs.
+**Hackathon priorities:** auth + roles, listings, AI natural-language search, Future Order with notification, checkout with visible platform fee, responsive web + mobile-friendly or shared API. Defer full subscription billing, full compliance, and real lending to stubs.
 
 Refer to **REQUIREMENTS.md** for stakeholder table, FR/NFR IDs, demo success criteria, and open questions.

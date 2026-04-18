@@ -47,7 +47,8 @@ Supported product categories:
 - **Exchange:** Facilitate barter or non-cash exchange where the team defines rules for the hackathon demo (e.g., credit/points vs. literal swap).  
 - **Subscribe:** Weekly (or recurring) consumption bundles sourced from **multiple** producers; user sets preferences and constraints.  
 - **Matching:** The app should **match consumption patterns** with available supply from **nearby** producers.  
-- **Intelligence:** Use **AI + prompt** (see §6) to interpret natural-language preferences (diet, allergies, organic intent, quantity, schedule) and suggest producers/listings.
+- **AI-powered search:** Consumer types a natural-language prompt (e.g., "Find me some zucchini") and the app returns available matching listings from nearby producers. This is the **primary discovery interface** (see §6).  
+- **Future Order / demand signal:** Consumer posts a future need with quantity and a time window (e.g., "I need 10 oranges in the next 2 days within 20 miles"). The system stores the request as an open demand signal. When any producer within the specified proximity publishes a matching listing before the deadline, the consumer is notified immediately so they can act.
 
 ### 4.2 Broker
 
@@ -66,10 +67,11 @@ Supported product categories:
 
 ## 6. AI & prompting
 
-**Goal:** Improve discovery and subscription planning using LLM-assisted interpretation of user intent.
+**Goal:** Improve discovery and subscription planning using LLM-assisted interpretation of user intent. Consumers interact primarily through natural language — typing a simple phrase is the primary search interface.
 
 **Minimum viable behaviors:**
 
+- **Natural-language product search:** Consumer types a plain prompt such as “Find me some zucchini” or “I need fresh eggs.” The system extracts intent (product, quantity, constraints) and returns available matching listings from nearby producers, ranked by proximity and availability. This is the primary search path — keyword/filter search is secondary.
 - Parse free-text preferences into structured filters (e.g., “no nightshades,” “weekly veg box under $X,” “flowers for events in April”).  
 - Suggest producers within **proximity** (define radius or ranking: distance + availability + match score).  
 - Explain **why** a producer or bundle was suggested (short rationale).  
@@ -109,10 +111,11 @@ Prioritize vertically: **one producer flow + one consumer flow + payments stub +
 | FR-05 | **Subscription** model: recurring intent + placeholder billing or mock | P1 |
 | FR-06 | **Exchange** flow: defined minimal rules + UI affordance | P2 |
 | FR-07 | Broker flow: aggregate buy from producers; separate UX from retail | P1 |
-| FR-08 | **AI + prompt**: preference text → structured prefs + ranked suggestions | P1 |
+| FR-08 | **AI natural-language search**: consumer types plain prompt (e.g., "Find me some zucchini") → LLM extracts product intent → returns ranked available listings within proximity | P0 |
 | FR-09 | **Platform fee** 5%–10% applied on paid transactions (transparent line item) | P1 |
 | FR-10 | Admin/config: fee percentage, feature flags | P2 |
-| FR-11 | Financing: lender link/placeholder; mentor-success **conceptual** UI | P3 |
+| FR-11 | **Future Order / demand signal**: consumer states a future need (e.g., "10 oranges within the next 2 days") → system stores the request; when a matching producer listing appears within the specified proximity and time window, consumer receives a notification | P1 |
+| FR-12 | Financing: lender link/placeholder; mentor-success **conceptual** UI | P3 |
 
 ---
 
@@ -139,7 +142,8 @@ Prioritize vertically: **one producer flow + one consumer flow + payments stub +
 
 ## 12. Success criteria (hackathon demo)
 
-- **Live demo:** Producer posts a listing; consumer finds it via **search or AI prompt**, completes a **mock or sandbox payment**, fee line item visible.  
+- **Live demo:** Producer posts a listing; consumer finds it via **AI natural-language prompt** (e.g., "Find me some zucchini"), completes a **mock or sandbox payment**, fee line item visible.  
+- **Future Order demo:** Consumer submits "I need 10 oranges in the next 2 days"; producer then posts an orange listing; consumer receives a notification within the demo session.  
 - **Story:** Show **proximity** and **multi-producer subscription** intent (can be UI + mocked backend).  
 - **Optional:** Broker view purchasing from a producer listing.
 
