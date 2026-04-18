@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="820" viewBox="0 0 1400 820">
+<defs>
+  <linearGradient id="heroGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+    <stop offset="0%" stop-color="#F0FDF4"/>
+    <stop offset="100%" stop-color="#DCFCE7"/>
+  </linearGradient>
+  <linearGradient id="btnGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#22C55E"/>
+    <stop offset="100%" stop-color="#16A34A"/>
+  </linearGradient>
+  <filter id="cardSh" x="-4%" y="-4%" width="108%" height="116%">
+    <feDropShadow dx="0" dy="2" stdDeviation="5" flood-color="#00000011"/>
+  </filter>
+  <filter id="navSh">
+    <feDropShadow dx="0" dy="1" stdDeviation="3" flood-color="#0000000D"/>
+  </filter>
+  <filter id="toastSh">
+    <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#00000025"/>
+  </filter>
+</defs>
+
+<!-- ══════════════════════════════════════════════════════════
+     BACKGROUND
+══════════════════════════════════════════════════════════ -->
+<rect width="1400" height="820" fill="#F3F4F6"/>
+
+<!-- ══════════════════════════════════════════════════════════
+     BROWSER CHROME  y=0–38
+══════════════════════════════════════════════════════════ -->
+<rect width="1400" height="38" fill="#D4D4D4"/>
+<!-- Window controls -->
+<circle cx="18" cy="19" r="6" fill="#FF5F57"/>
+<circle cx="38" cy="19" r="6" fill="#FEBC2E"/>
+<circle cx="58" cy="19" r="6" fill="#28C840"/>
+<!-- Active tab -->
+<path d="M 72,38 Q 76,8 84,8 H 344 Q 352,8 356,38 Z" fill="white"/>
+<circle cx="91" cy="23" r="7" fill="#16A34A"/>
+<text x="92" y="27" text-anchor="middle" fill="white" font-family="Arial,sans-serif" font-size="8" font-weight="bold">CG</text>
+<text x="104" y="27" fill="#374151" font-family="Arial,sans-serif" font-size="10">Community Garden — AI Discover</text>
+<!-- Inactive tab -->
+<rect x="362" y="10" width="160" height="28" rx="5" fill="#C0C0C0"/>
+<text x="442" y="28" text-anchor="middle" fill="#6B7280" font-family="Arial,sans-serif" font-size="10">New Tab</text>
+<!-- URL bar -->
+<rect x="450" y="7" width="500" height="24" rx="12" fill="white"/>
+<text x="700" y="23" text-anchor="middle" fill="#6B7280" font-family="Arial,sans-serif" font-size="11">🔒  localhost:5173 / discover</text>
+<!-- Browser buttons -->
+<circle cx="1010" cy="19" r="5" fill="#9CA3AF"/>
+<circle cx="1030" cy="19" r="5" fill="#9CA3AF"/>
+<circle cx="1050" cy="19" r="5" fill="#9CA3AF"/>
+
+<!-- ══════════════════════════════════════════════════════════
+     APP NAVIGATION BAR  y=38–96
+══════════════════════════════════════════════════════════ -->
+<rect x="0" y="38" width="1400" height="58" fill="white" filter="url(#navSh)"/>
+<line x1="0" y1="95" x2="1400" y2="95" stroke="#E5E7EB" stroke-width="1"/>
+
+<!-- Logo -->
+<circle cx="30" cy="67" r="16" fill="#16A34A"/>
+<text x="30" y="73" text-anchor="middle" fill="white" font-family="Arial,sans-serif" font-size="15">🌱</text>
+<text x="56" y="64" fill="#166534" font-family="Arial,sans-serif" font-size="15" font-weight="bold">Community</text>
+<text x="56" y="78" fill="#166534" font-family="Arial,sans-serif" font-size="13">Garden</text>
+
+<!-- Nav divider -->
+<line x1="155" y1="50" x2="155" y2="84" stroke="#E5E7EB" stroke-width="1"/>
+
+<!-- Nav links -->
+<text x="180" y="72" fill="#16A34A" font-family="Arial,sans-serif" font-size="13" font-weight="bold">Discover</text>
+<rect x="180" y="93" width="60" height="2" rx="1" fill="#16A34A"/>
+
+<text x="258" y="72" fill="#6B7280" font-family="Arial,sans-serif" font-size="13">Browse</text>
+<text x="318" y="72" fill="#6B7280" font-family="Arial,sans-serif" font-size="13">Orders</text>
+<text x="377" y="72" fill="#6B7280" font-family="Arial,sans-serif" font-size="13">Future Orders</text>
+<text x="477" y="72" fill="#6B7280" font-family="Arial,sans-serif" font-size="13">Dashboard</text>
+
+<!-- Right side: search icon -->
+<circle cx="1270" cy="67" r="8" fill="none" stroke="#9CA3AF" stroke-width="1.5"/>
+<line x1="1276" y1="73" x2="1281" y2="78" stroke="#9CA3AF" stroke-width="1.5" stroke-linecap="round"/>
+
+<!-- Cart with badge -->
+<rect x="1296" y="57" width="20" height="17" rx="3" fill="none" stroke="#374151" stroke-width="1.5"/>
+<path d="M 1292,57 L 1294,53 L 1320,53 L 1322,57" fill="none" stroke="#374151" stroke-width="1.5" stroke-linejoin="round"/>
+<circle cx="1321" cy="53" r="7" fill="#EF4444"/>
+<text x="1321" y="57" text-anchor="middle" fill="white" font-family="Arial,sans-serif" font-size="8" font-weight="bold">2</text>
+
+<!-- User avatar -->
+<circle cx="1360" cy="67" r="16" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.5"/>
+<text x="1360" y="72" text-anchor="middle" fill="#166534" font-family="Arial,sans-serif" font-size="11" font-weight="bold">RC</text>
+
+<!-- ══════════════════════════════════════════════════════════
+     HERO / SEARCH SECTION  y=96–208
+══════════════════════════════════════════════════════════ -->
+<rect x="0" y="96" width="1400" height="112" fill="url(#heroGrad)"/>
+
+<!-- Decorative blobs -->
+<circle cx="100" cy="140" r="55" fill="#16A34A" opacity="0.05"/>
+<circle cx="1310" cy="130" r="70" fill="#16A34A" opacity="0.05"/>
+<text x="1350" y="155" fill="#16A34A" font-family="Arial,sans-serif" font-size="40" opacity="0.12">🌿</text>
+
+<!-- Heading -->
+<text x="700" y="130" text-anchor="middle" fill="#166534" font-family="Arial,sans-serif" font-size="22" font-weight="bold">Fresh from your neighborhood</text>
+<text x="700" y="150" text-anchor="middle" fill="#4B5563" font-family="Arial,sans-serif" font-size="12">Tell us what you are looking for — AI will find the best matches near you</text>
+
+<!-- Search input -->
+<rect x="260" y="160" width="880" height="40" rx="20" fill="white" stroke="#D1D5DB" stroke-width="1.5"/>
+<!-- Magnifier icon -->
+<circle cx="284" cy="180" r="7" fill="none" stroke="#9CA3AF" stroke-width="1.5"/>
+<line x1="289" y1="185" x2="294" y2="190" stroke="#9CA3AF" stroke-width="1.5" stroke-linecap="round"/>
+<!-- Placeholder text -->
+<text x="300" y="184" fill="#9CA3AF" font-family="Arial,sans-serif" font-size="13">Find me some zucchini near Las Cruces...</text>
+<!-- AI badge in input -->
+<rect x="1070" y="167" width="58" height="26" rx="13" fill="#EDE9FE"/>
+<text x="1099" y="183" text-anchor="middle" fill="#7C3AED" font-family="Arial,sans-serif" font-size="10" font-weight="bold">🤖 AI</text>
+<!-- Search button -->
+<rect x="1134" y="165" width="92" height="30" rx="15" fill="#16A34A"/>
+<text x="1180" y="184" text-anchor="middle" fill="white" font-family="Arial,sans-serif" font-size="12" font-weight="bold">Search</text>
+
+<!-- ══════════════════════════════════════════════════════════
+     AI BANNER + FILTER BAR  y=208–262
+══════════════════════════════════════════════════════════ -->
+<rect x="0" y="208" width="1400" height="54" fill="white"/>
+<line x1="0" y1="261" x2="1400" y2="261" stroke="#E5E7EB" stroke-width="1"/>
+<line x1="0" y1="208" x2="1400" y2="208" stroke="#E5E7EB" stroke-width="1"/>
+
+<!-- AI explanation -->
+<rect x="20" y="216" width="22" height="22" rx="5" fill="#7C3AED"/>
+<text x="31" y="231" text-anchor="middle" fill="white" font-family="Arial,sans-serif" font-size="9" font-weight="bold">AI</text>
+<text x="50" y="231" fill="#374151" font-family="Arial,sans-serif" font-size="12">Found <tspan font-weight="bold" fill="#166534">6 results</tspan> for "<tspan font-style="italic">zucchini</tspan>"  ·  Within 15 miles of <tspan font-weight="bold">Las Cruces, NM 88001</tspan></text>
+
+<!-- "6 results" count right side -->
+<text x="420" y="248" fill="#9CA3AF" font-family="Arial,sans-serif" font-size="10">Showing 1–6 of 6 · Sorted by proximity</text>
+
+<!-- Filter chips -->
+<rect x="660" y="215" width="34" height="22" rx="11" fill="#F3F4F6" stroke="#E5E7EB" stroke-width="1"/>
+<text x="677" y="230" text-anchor="middle" fill="#374151" font-family="Arial,sans-serif" font-size="10">All</text>
+
+<rect x="700" y="215" width="94" height="22" rx="11" fill="#F0FDF4" stroke="#86EFAC" stroke-width="1"/>
+<text x="747" y="230" text-anchor="middle" fill="#166534" font-family="Arial,sans-serif" font-size="10">🥦 Vegetables</text>
+
+<rect x="800" y="215" width="62" height="22" rx="11" fill="#F3F4F6"/>
+<text x="831" y="230" text-anchor="middle" fill="#6B7280" font-family="Arial,sans-serif" font-size="10">🍎 Fruits</text>
+
+<rect x="868" y="215" width="50" height="22" rx="11" fill="#F3F4F6"/>
+<text x="893" y="230" text-anchor="middle" fill="#6B7280" font-family="Arial,sans-serif" font-size="10">🥚 Eggs</text>
+
+<rect x="924" y="215" width="62" height="22" rx="11" fill="#F3F4F6"/>
+<text x="955" y="230" text-anchor="middle" fill="#6B7280" font-family="Arial,sans-serif" font-size="10">🌸 Flowers</text>
+
+<!-- Sort + Filter buttons -->
+<rect x="1130" y="214" width="88" height="24" rx="5" fill="#F9FAFB" stroke="#D1D5DB" stroke-width="1"/>
+<text x="1174" y="230" text-anchor="middle" fill="#374151" font-family="Arial,sans-serif" font-size="10">Distance ▾</text>
+
+<rect x="1226" y="214" width="76" height="24" rx="5" fill="#F9FAFB" stroke="#D1D5DB" stroke-width="1"/>
+<text x="1264" y="230" text-anchor="middle" fill="#374151" font-family="Arial,sans-serif" font-size="10">⊞ Filters</text>
+
+<rect x="1310" y="214" width="70" height="24" rx="5" fill="#F0FDF4" stroke="#86EFAC" stroke-width="1"/>
+<text x="1345" y="230" text-anchor="middle" fill="#166534" font-family="Arial,sans-serif" font-size="10">Map view</text>
+
+<!-- ══════════════════════════════════════════════════════════
+     CARD GRID  — 3 columns × 2 rows
+     Card: w=442, h=246
+     Row 1: y=270   Row 2: y=532
+══════════════════════════════════════════════════════════ -->
+
+<!-- ─── CARD A: Fresh Zucchini ─── x=20 y=270 -->
+<rect x="20" y="270" width="442" height="246" rx="12" fill="white" filter="url(#cardSh)"/>
+<!-- Image area (left-rounded) -->
+<path d="M 32,270 H 178 V 516 H 32 Q 20,516 20,504 V 282 Q 20,270 32,270 Z" fill="#BBFAD1"/>
+<text x="99" y="402" text-anchor="middle" font-family="Arial,sans-serif" font-size="52">🥒</text>
+<!-- AI Best Match badge -->
+<rect x="22" y="272" width="76" height="18" rx="5" fill="#7C3AED"/>
+<text x="60" y="284" text-anchor="middle" fill="white" font-family="Arial,sans-serif" font-size="9" font-weight="bold">🤖 Best Match</text>
+<!-- Category badge -->
+<rect x="190" y="278" width="78" height="18" rx="9" fill="#DCFCE7"/>
+<text x="229" y="290" text-anchor="middle" fill="#166534" font-family="Arial,sans-serif" font-size="9" font-weight="bold">🥒 Vegetable</text>
+<!-- Title -->
+<text x="190" y="318" fill="#111827" font-family="Arial,sans-serif" font-size="16" font-weight="bold">Fresh Zucchini</text>
+<!-- Producer -->
+<text x="190" y="338" fill="#6B7280" font-family="Arial,sans-serif" font-size="11">Maria's Garden</text>
+<rect x="302" y="328" width="58" height="16" rx="8" fill="#DBEAFE"/>
+<text x="331" y="339" text-anchor="middle" fill="#1D4ED8" font-family="Arial,sans-serif" font-size="9">✓ Verified</text>
+<!-- Rating + distance -->
+<text x="190" y="357" fill="#374151" font-family="Arial,sans-serif" font-size="11">⭐ 4.8  ·  📍 2.3 mi</text>
+<!-- Divider -->
+<line x1="190" y1="369" x2="446" y2="369" stroke="#F3F4F6" stroke-width="1"/>
+<!-- Price -->
+<text x="190" y="392" fill="#111827" font-family="Arial,sans-serif" font-size="20" font-weight="bold">$3.00</text>
+<text x="244" y="392" fill="#6B7280" font-family="Arial,sans-serif" font-size="13"> / lb</text>
+<!-- Availability -->
+<text x="190" y="411" fill="#6B7280" font-family="Arial,sans-serif" font-size="11">8 lbs available · Pickup &amp; Delivery</text>
+<!-- Button -->
+<rect x="190" y="430" width="252" height="36" rx="9" fill="url(#btnGrad)"/>
+<text x="316" y="452" text-anchor="middle" fill="white" font-family="Arial,sans-serif" font-size="13" font-weight="bold">+ Add to Cart</text>
+
+<!-- ─── CARD B: Heirloom Tomatoes ─── x=478 y=270 -->
+<rect x="478" y="270" width="442" height="246" rx="12" fill="white" filter="url(#cardSh)"/>
+<path d="M 490,270 H 636 V 516 H 490 Q 478,516 478,504 V 282 Q 478,270 490,270 Z" fill="#FEE2E2"/>
+<text x="557" y="402" text-anchor="middle" font-family="Arial,sans-serif" font-size="52">🍅</text>
+<!-- Low stock badge -->
+<rect x="480" y="272" width="68" height="18" rx="5" fill="#EF4444"/>
+<text x="514" y="284" text-anchor="middle" fill="white" font-family="Arial,sans-serif" font-size="9" font-weight="bold">Low Stock</text>
+<!-- Category -->
+<rect x="648" y="278" width="78" height="18" rx="9" fill="#FEE2E2"/>
+<text x="687" y="290" text-anchor="middle" fill="#991B1B" font-family="Arial,sans-serif" font-size="9" font-weight="bold">🍅 Vegetable</text>
+<!-- Title -->
+<text x="648" y="318" fill="#111827" font-family="Arial,sans-serif" font-size="16" font-weight="bold">Heirloom Tomatoes</text>
+<!-- Producer -->
+<text x="648" y="338" fill="#6B7280" font-family="Arial,sans-serif" font-size="11">Green Thumb Farm</text>
+<rect x="774" y="328" width="58" height="16" rx="8" fill="#DBEAFE"/>
+<text x="803" y="339" text-anchor="middle" fill="#1D4ED8" font-family="Arial,sans-serif" font-size="9">✓ Verified</text>
+<!-- Rating + distance -->
+<text x="648" y="357" fill="#374151" font-family="Arial,sans-serif" font-size="11">⭐ 4.6  ·  📍 4.1 mi</text>
+<!-- Divider -->
+<line x1="648" y1="369" x2="904" y2="369" stroke="#F3F4F6" stroke-width="1"/>
+<!-- Price -->
+<text x="648" y="392" fill="#111827" font-family="Arial,sans-serif" font-size="20" font-weight="bold">$4.50</text>
+<text x="706" y="392" fill="#6B7280" font-family="Arial,sans-serif" font-size="13"> / lb</text>
+<!-- Low stock warning -->
+<text x="648" y="411" fill="#EF4444" font-family="Arial,sans-serif" font-size="11">⚠ Only 5 lbs left!</text>
+<!-- Button -->
+<rect x="648" y="430" width="252" height="36" rx="9" fill="url(#btnGrad)"/>
+<text x="774" y="452" text-anchor="middle" fill="white" font-family="Arial,sans-serif" font-size="13" font-weight="bold">+ Add to Cart</text>
+
+<!-- ─── CARD C: Farm Fresh Eggs ─── x=936 y=270 -->
+<rect x="936" y="270" width="442" height="246" rx="12" fill="white" filter="url(#cardSh)"/>
+<path d="M 948,270 H 1094 V 516 H 948 Q 936,516 936,504 V 282 Q 936,270 948,270 Z" fill="#FEF9C3"/>
+<text x="1015" y="400" text-anchor="middle" font-family="Arial,sans-serif" font-size="52">🥚</text>
+<!-- Popular badge -->
+<rect x="938" y="272" width="64" height="18" rx="5" fill="#F59E0B"/>
+<text x="970" y="284" text-anchor="middle" fill="white" font-family="Arial,sans-serif" font-size="9" font-weight="bold">⭐ Popular</text>
+<!-- Category -->
+<rect x="1106" y="278" width="52" height="18" rx="9" fill="#FEF9C3"/>
+<text x="1132" y="290" text-anchor="middle" fill="#92400E" font-family="Arial,sans-serif" font-size="9" font-weight="bold">🥚 Eggs</text>
+<!-- Title -->
+<text x="1106" y="318" fill="#111827" font-family="Arial,sans-serif" font-size="16" font-weight="bold">Farm Fresh Eggs</text>
+<!-- Producer -->
+<text x="1106" y="338" fill="#6B7280" font-family="Arial,sans-serif" font-size="11">Sunny Acres · Free Range</text>
+<!-- Rating + distance -->
+<text x="1106" y="357" fill="#374151" font-family="Arial,sans-serif" font-size="11">⭐ 4.9  ·  📍 5.8 mi</text>
+<!-- Divider -->
+<line x1="1106" y1="369" x2="1362" y2="369" stroke="#F3F4F6" stroke-width="1"/>
+<!-- Price -->
+<text x="1106" y="392" fill="#111827" font-family="Arial,sans-serif" font-size="20" font-weight="bold">$6.00</text>
+<text x="1164" y="392" fill="#6B7280" font-family="Arial,sans-serif" font-size="13"> / dozen</text>
+<!-- Availability -->
+<text x="1106" y="411" fill="#6B7280" font-family="Arial,sans-serif" font-size="11">12 dozen available</text>
+<!-- Button -->
+<rect x="1106" y="430" width="252" height="36" rx="9" fill="url(#btnGrad)"/>
+<text x="1232" y="452" text-anchor="middle" fill="white" font-family="Arial,sans-serif" font-size="13" font-weight="bold">+ Add to Cart</text>
+
+<!-- ─── CARD D: Navel Oranges (matches Future Order!) ─── x=20 y=532 -->
+<rect x="20" y="532" width="442" height="246" rx="12" fill="white" filter="url(#cardSh)"/>
+<path d="M 32,532 H 178 V 778 H 32 Q 20,778 20,766 V 544 Q 20,532 32,532 Z" fill="#FFEDD5"/>
+<text x="99" y="664" text-anchor="middle" font-family="Arial,sans-serif" font-size="52">🍊</text>
+<!-- Future Order Match badge -->
+<rect x="22" y="534" width="110" height="18" rx="5" fill="#059669"/>
+<text x="77" y="546" text-anchor="middle" fill="white" font-family="Arial,sans-serif" font-size="9" font-weight="bold">🔔 Matches Your Demand</text>
+<!-- Category -->
+<rect x="190" y="540" width="54" height="18" rx="9" fill="#FFEDD5"/>
+<text x="217" y="552" text-anchor="middle" fill="#9A3412" font-family="Arial,sans-serif" font-size="9" font-weight="bold">🍊 Fruit</text>
+<!-- Title -->
+<text x="190" y="580" fill="#111827" font-family="Arial,sans-serif" font-size="16" font-weight="bold">Navel Oranges</text>
+<!-- Producer -->
+<text x="190" y="600" fill="#6B7280" font-family="Arial,sans-serif" font-size="11">Casa Verde Orchard</text>
+<!-- Rating + distance -->
+<text x="190" y="619" fill="#374151" font-family="Arial,sans-serif" font-size="11">⭐ 4.7  ·  📍 7.2 mi</text>
+<!-- Divider -->
+<line x1="190" y1="631" x2="446" y2="631" stroke="#F3F4F6" stroke-width="1"/>
+<!-- Price -->
+<text x="190" y="654" fill="#111827" font-family="Arial,sans-serif" font-size="20" font-weight="bold">$2.50</text>
+<text x="244" y="654" fill="#6B7280" font-family="Arial,sans-serif" font-size="13"> / lb</text>
+<!-- Availability -->
+<text x="190" y="673" fill="#6B7280" font-family="Arial,sans-serif" font-size="11">15 lbs available · Expires in 2 days</text>
+<!-- Button -->
+<rect x="190" y="692" width="252" height="36" rx="9" fill="url(#btnGrad)"/>
+<text x="316" y="714" text-anchor="middle" fill="white" font-family="Arial,sans-serif" font-size="13" font-weight="bold">+ Add to Cart</text>
+
+<!-- ─── CARD E: Purple Basil (Exchange) ─── x=478 y=532 -->
+<rect x="478" y="532" width="442" height="246" rx="12" fill="white" filter="url(#cardSh)"/>
+<path d="M 490,532 H 636 V 778 H 490 Q 478,778 478,766 V 544 Q 478,532 490,532 Z" fill="#CCFBF1"/>
+<text x="557" y="662" text-anchor="middle" font-family="Arial,sans-serif" font-size="52">🌿</text>
+<!-- Exchange badge -->
+<rect x="480" y="534" width="72" height="18" rx="5" fill="#0891B2"/>
+<text x="516" y="546" text-anchor="middle" fill="white" font-family="Arial,sans-serif" font-size="9" font-weight="bold">⇄ Exchange</text>
+<!-- Category -->
+<rect x="648" y="540" width="58" height="18" rx="9" fill="#CCFBF1"/>
+<text x="677" y="552" text-anchor="middle" fill="#065F46" font-family="Arial,sans-serif" font-size="9" font-weight="bold">🌿 Herb</text>
+<!-- Title -->
+<text x="648" y="580" fill="#111827" font-family="Arial,sans-serif" font-size="16" font-weight="bold">Purple Basil Bundle</text>
+<!-- Producer -->
+<text x="648" y="600" fill="#6B7280" font-family="Arial,sans-serif" font-size="11">Herb Haven Garden</text>
+<!-- Rating + distance -->
+<text x="648" y="619" fill="#374151" font-family="Arial,sans-serif" font-size="11">⭐ 4.5  ·  📍 3.4 mi</text>
+<!-- Divider -->
+<line x1="648" y1="631" x2="904" y2="631" stroke="#F3F4F6" stroke-width="1"/>
+<!-- Exchange info -->
+<text x="648" y="654" fill="#0891B2" font-family="Arial,sans-serif" font-size="14" font-weight="bold">Exchange Only</text>
+<text x="648" y="673" fill="#6B7280" font-family="Arial,sans-serif" font-size="11">Offers: tomatoes, eggs, or seedlings</text>
+<!-- Exchange button -->
+<rect x="648" y="692" width="252" height="36" rx="9" fill="none" stroke="#0891B2" stroke-width="1.5"/>
+<text x="774" y="714" text-anchor="middle" fill="#0891B2" font-family="Arial,sans-serif" font-size="13" font-weight="bold">⇄ Propose Exchange</text>
+
+<!-- ─── CARD F: Rainbow Chard ─── x=936 y=532 -->
+<rect x="936" y="532" width="442" height="246" rx="12" fill="white" filter="url(#cardSh)"/>
+<path d="M 948,532 H 1094 V 778 H 948 Q 936,778 936,766 V 544 Q 936,532 948,532 Z" fill="#EDE9FE"/>
+<text x="1015" y="663" text-anchor="middle" font-family="Arial,sans-serif" font-size="52">🥬</text>
+<!-- Low stock badge -->
+<rect x="938" y="534" width="68" height="18" rx="5" fill="#EF4444"/>
+<text x="972" y="546" text-anchor="middle" fill="white" font-family="Arial,sans-serif" font-size="9" font-weight="bold">Low Stock</text>
+<!-- Category -->
+<rect x="1106" y="540" width="78" height="18" rx="9" fill="#EDE9FE"/>
+<text x="1145" y="552" text-anchor="middle" fill="#4C1D95" font-family="Arial,sans-serif" font-size="9" font-weight="bold">🥬 Vegetable</text>
+<!-- Title -->
+<text x="1106" y="580" fill="#111827" font-family="Arial,sans-serif" font-size="16" font-weight="bold">Rainbow Chard</text>
+<!-- Producer -->
+<text x="1106" y="600" fill="#6B7280" font-family="Arial,sans-serif" font-size="11">Community Plot No. 7</text>
+<!-- Rating + distance -->
+<text x="1106" y="619" fill="#374151" font-family="Arial,sans-serif" font-size="11">⭐ 4.3  ·  📍 9.1 mi</text>
+<!-- Divider -->
+<line x1="1106" y1="631" x2="1362" y2="631" stroke="#F3F4F6" stroke-width="1"/>
+<!-- Price -->
+<text x="1106" y="654" fill="#111827" font-family="Arial,sans-serif" font-size="20" font-weight="bold">$3.50</text>
+<text x="1164" y="654" fill="#6B7280" font-family="Arial,sans-serif" font-size="13"> / bunch</text>
+<!-- Low stock warning -->
+<text x="1106" y="673" fill="#EF4444" font-family="Arial,sans-serif" font-size="11">⚠ Only 6 bunches left!</text>
+<!-- Button -->
+<rect x="1106" y="692" width="252" height="36" rx="9" fill="url(#btnGrad)"/>
+<text x="1232" y="714" text-anchor="middle" fill="white" font-family="Arial,sans-serif" font-size="13" font-weight="bold">+ Add to Cart</text>
+
+<!-- ══════════════════════════════════════════════════════════
+     CART MINI DROPDOWN (open)
+══════════════════════════════════════════════════════════ -->
+<rect x="1230" y="96" width="162" height="156" rx="10" fill="white" filter="url(#toastSh)" stroke="#E5E7EB" stroke-width="1"/>
+<text x="1311" y="116" text-anchor="middle" fill="#111827" font-family="Arial,sans-serif" font-size="11" font-weight="bold">Cart (2 items)</text>
+<line x1="1238" y1="122" x2="1384" y2="122" stroke="#F3F4F6" stroke-width="1"/>
+<!-- Cart item 1 -->
+<rect x="1238" y="130" width="32" height="28" rx="4" fill="#BBFAD1"/>
+<text x="1254" y="149" text-anchor="middle" font-family="Arial,sans-serif" font-size="14">🥒</text>
+<text x="1278" y="141" fill="#111827" font-family="Arial,sans-serif" font-size="10" font-weight="bold">Fresh Zucchini</text>
+<text x="1278" y="153" fill="#6B7280" font-family="Arial,sans-serif" font-size="9">2 lbs · $6.00</text>
+<!-- Cart item 2 -->
+<rect x="1238" y="166" width="32" height="28" rx="4" fill="#FEE2E2"/>
+<text x="1254" y="185" text-anchor="middle" font-family="Arial,sans-serif" font-size="14">🍅</text>
+<text x="1278" y="177" fill="#111827" font-family="Arial,sans-serif" font-size="10" font-weight="bold">Heirloom Tomatoes</text>
+<text x="1278" y="189" fill="#6B7280" font-family="Arial,sans-serif" font-size="9">1 lb · $4.50</text>
+<!-- Divider -->
+<line x1="1238" y1="202" x2="1384" y2="202" stroke="#F3F4F6" stroke-width="1"/>
+<!-- Total -->
+<text x="1246" y="217" fill="#374151" font-family="Arial,sans-serif" font-size="11">Subtotal:</text>
+<text x="1374" y="217" text-anchor="end" fill="#111827" font-family="Arial,sans-serif" font-size="12" font-weight="bold">$10.50</text>
+<!-- Checkout btn -->
+<rect x="1238" y="224" width="138" height="22" rx="6" fill="#16A34A"/>
+<text x="1307" y="239" text-anchor="middle" fill="white" font-family="Arial,sans-serif" font-size="10" font-weight="bold">Checkout →</text>
+
+<!-- ══════════════════════════════════════════════════════════
+     NOTIFICATION TOAST  (Future Order match)
+══════════════════════════════════════════════════════════ -->
+<rect x="920" y="744" width="462" height="62" rx="10" fill="#166534" filter="url(#toastSh)"/>
+<rect x="920" y="744" width="6" height="62" rx="3" fill="#22C55E"/>
+<!-- Bell icon -->
+<circle cx="951" cy="775" r="14" fill="rgba(255,255,255,0.15)"/>
+<text x="951" y="780" text-anchor="middle" fill="white" font-family="Arial,sans-serif" font-size="16">🔔</text>
+<!-- Message -->
+<text x="972" y="763" fill="rgba(255,255,255,0.7)" font-family="Arial,sans-serif" font-size="10">FUTURE ORDER MATCHED</text>
+<text x="972" y="779" fill="white" font-family="Arial,sans-serif" font-size="11" font-weight="bold">Casa Verde listed Navel Oranges matching your demand!</text>
+<text x="972" y="795" fill="rgba(255,255,255,0.7)" font-family="Arial,sans-serif" font-size="10">$2.50/lb · 7.2 mi away · Just now</text>
+<text x="1364" y="775" fill="rgba(255,255,255,0.5)" font-family="Arial,sans-serif" font-size="14">×</text>
+</svg>
