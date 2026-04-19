@@ -1,8 +1,10 @@
 import { Router, Request, Response, NextFunction } from 'express';
 import { body, validationResult } from 'express-validator';
 import { authenticate } from '../middleware/authenticate';
+import { authorize } from '../middleware/authorize';
 import { aiRateLimiter } from '../middleware/rateLimiter';
 import { aiSearch } from '../services/aiSearchService';
+import { parseDemandIntent, DemandParseError } from '../services/demandParseService';
 
 const router = Router();
 
@@ -30,9 +32,28 @@ router.post(
   }
 );
 
-// M4 stub
-router.post('/parse-demand', (_req, res) => {
-  res.status(501).json({ error: { code: 'NOT_IMPLEMENTED', message: 'Coming in M4' } });
-});
+// ── POST /ai/parse-demand — parse demand intent (preview only, does not save) ─
+router.post(
+  '/parse-demand',
+  authenticate,
+  body('query').trim().notEmpty().isLength({ max: 1000 }).withMessage('query must be 1–1000 characters'),
+  async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      res.status(400).json({ error: { code: 'VALIDATION_ERROR', details: errors.array() } });
+      return;
+    }
+    try {
+      const intent = await parseDemandIntent(req.body.query as string);
+      res.json(intent);
+    } catch (err) {
+      if (err instanceof DemandParseError) {
+        res.status(422).json({ error: { code: 'PARSE_FAILED', message: err.message } });
+        return;
+      }
+      next(err);
+    }
+  }
+);
 
 export default router;

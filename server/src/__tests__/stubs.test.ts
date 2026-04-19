@@ -32,17 +32,13 @@ jest.mock('../db/redis', () => ({
 const app = createApp();
 
 // M3 implemented: /api/v1/orders, /api/v1/ai/search, /api/v1/admin/config
+// M4 implemented: /api/v1/future-orders, /api/v1/ai/parse-demand
 // M5 stub: PATCH /admin/config
 const STUB_ROUTES: Array<{ method: 'get' | 'post' | 'put' | 'patch' | 'delete'; path: string }> = [
   // M5 stubs
   { method: 'post',   path: '/api/v1/subscriptions' },
   { method: 'get',    path: '/api/v1/subscriptions' },
   { method: 'post',   path: '/api/v1/exchanges' },
-  // M4 stubs
-  { method: 'post',   path: '/api/v1/future-orders' },
-  { method: 'get',    path: '/api/v1/future-orders' },
-  // M3 stub (parse-demand is M4)
-  { method: 'post',   path: '/api/v1/ai/parse-demand' },
 ];
 
 describe('M0-API-04: stub endpoints respond 501 NOT_IMPLEMENTED', () => {

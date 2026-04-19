@@ -13,6 +13,7 @@ export const env = {
   stripeSecretKey: process.env.STRIPE_SECRET_KEY ?? '',
   anthropicApiKey: process.env.ANTHROPIC_API_KEY ?? '',
   sendgridApiKey:  process.env.SENDGRID_API_KEY ?? '',
+  webBaseUrl:      process.env.WEB_BASE_URL ?? 'http://localhost:5173',
   port:            parseInt(process.env.PORT ?? '3000'),
   nodeEnv:         process.env.NODE_ENV ?? 'development',
   corsOrigin:      process.env.CORS_ORIGIN ?? 'http://localhost:5173',

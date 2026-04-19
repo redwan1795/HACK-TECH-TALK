@@ -57,6 +57,13 @@ export const useAuthStore = create<AuthState>()(
         refreshToken: state.refreshToken,
         isAuthenticated: state.isAuthenticated,
       }),
+      onRehydrateStorage: () => (state) => {
+        // Keep the separate accessToken key in sync so the apiClient interceptor
+        // can read it after a page refresh (it only reads localStorage, not Zustand).
+        if (state?.accessToken) {
+          localStorage.setItem('accessToken', state.accessToken);
+        }
+      },
     }
   )
 );

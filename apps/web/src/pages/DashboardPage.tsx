@@ -38,6 +38,15 @@ const ACTIONS = [
     color: 'border-amber-200 bg-amber-50 hover:border-amber-400',
     ctaColor: 'bg-amber-600 hover:bg-amber-700 text-white',
   },
+  {
+    icon: '🔔',
+    title: 'Future Requests',
+    description: 'Post a demand in plain language — get notified when a match is listed nearby.',
+    href: '/future-orders',
+    cta: 'My Requests',
+    color: 'border-purple-200 bg-purple-50 hover:border-purple-400',
+    ctaColor: 'bg-purple-600 hover:bg-purple-700 text-white',
+  },
 ];
 
 export default function DashboardPage() {

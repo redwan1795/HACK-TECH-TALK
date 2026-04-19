@@ -12,6 +12,8 @@ import CartPage from './pages/CartPage';
 import CartCheckoutPage from './pages/CartCheckoutPage';
 import OrderConfirmationPage from './pages/OrderConfirmationPage';
 import OrdersListPage from './pages/OrdersListPage';
+import FutureOrderPage from './pages/FutureOrderPage';
+import FutureOrdersListPage from './pages/FutureOrdersListPage';
 import { ProtectedRoute } from './components/ProtectedRoute';
 
 function PlaceholderPage({ name }: { name: string }) {
@@ -61,8 +63,11 @@ export default function App() {
       <Route path="/orders" element={
         <ProtectedRoute><OrdersListPage /></ProtectedRoute>
       } />
+      <Route path="/future-orders/new" element={
+        <ProtectedRoute><FutureOrderPage /></ProtectedRoute>
+      } />
       <Route path="/future-orders" element={
-        <ProtectedRoute><PlaceholderPage name="Future Orders — coming in M4" /></ProtectedRoute>
+        <ProtectedRoute><FutureOrdersListPage /></ProtectedRoute>
       } />
 
       {/* Any authenticated user can sell */}

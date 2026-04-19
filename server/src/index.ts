@@ -9,6 +9,7 @@ import usersRouter from './routes/users';
 import ordersRouter from './routes/orders';
 import aiRouter from './routes/ai';
 import adminRouter from './routes/admin';
+import futureOrdersRouter from './routes/future-orders';
 import { errorHandler } from './middleware/errorHandler';
 
 export function createApp() {
@@ -34,9 +35,9 @@ export function createApp() {
     res.status(501).json({ error: { code: 'NOT_IMPLEMENTED', message: 'Coming in a future milestone' } });
   };
 
-  app.use('/api/v1/subscriptions', stub);
-  app.use('/api/v1/exchanges',     stub);
-  app.use('/api/v1/future-orders', stub);
+  app.use('/api/v1/subscriptions',  stub);
+  app.use('/api/v1/exchanges',      stub);
+  app.use('/api/v1/future-orders',  futureOrdersRouter);
 
   app.use(errorHandler);
 

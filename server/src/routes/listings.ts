@@ -5,6 +5,7 @@ import { authenticate } from '../middleware/authenticate';
 import { upload } from '../middleware/upload';
 import { searchListings } from '../services/listingService';
 import { getCoordinatesForZip } from '../services/geocodeService';
+import { triggerListingPublishFanout } from '../jobs/listingPublishFanout';
 
 const router = Router();
 
@@ -327,6 +328,11 @@ router.patch(
         'UPDATE listings SET is_available = $1, updated_at = NOW() WHERE id = $2 RETURNING *',
         [publish, req.params.id]
       );
+
+      if (publish) {
+        triggerListingPublishFanout(req.params.id);
+      }
+
       res.json(updated[0]);
     } catch (err) {
       next(err);
