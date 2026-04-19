@@ -1,0 +1,23 @@
+{
+  "name": "community-garden",
+  "private": true,
+  "workspaces": [
+    "apps/web",
+    "apps/mobile",
+    "server",
+    "packages/shared-types"
+  ],
+  "scripts": {
+    "dev:web":    "npm -w apps/web run dev",
+    "dev:server": "npm -w server run dev",
+    "migrate":    "npm -w server run migrate",
+    "seed":       "npm -w server run seed",
+    "lint":       "npm -w server run lint && npm -w apps/web run lint",
+    "typecheck":  "npm -w packages/shared-types run typecheck && npm -w server run typecheck && npm -w apps/web run typecheck",
+    "test":       "npm -w server run test",
+    "test:coverage": "npm -w server run test:coverage"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.0"
+  }
+}

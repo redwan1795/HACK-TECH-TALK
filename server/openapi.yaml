@@ -1,0 +1,719 @@
+openapi: 3.1.0
+info:
+  title: Community Garden API
+  version: 1.0.0
+  description: |
+    Marketplace API connecting local food producers with consumers.
+    Supports AI-powered search (FR-08), Future Orders demand signals (FR-11),
+    Stripe payments, and SendGrid notifications.
+  contact:
+    name: Community Garden Team
+    url: https://github.com/redwan1795/HACK-TECH-TALK
+
+servers:
+  - url: http://localhost:3000/api/v1
+    description: Local development
+  - url: https://api.community-garden.app/v1
+    description: Production
+
+tags:
+  - name: auth
+  - name: users
+  - name: listings
+  - name: orders
+  - name: subscriptions
+  - name: exchanges
+  - name: future-orders
+  - name: admin
+  - name: ai
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    UserRole:
+      type: string
+      enum: [consumer, producer, broker, admin]
+
+    ListingCategory:
+      type: string
+      enum: [vegetable, fruit, flower, egg, other]
+
+    User:
+      type: object
+      required: [id, email, name, role, licensed, createdAt]
+      properties:
+        id:          { type: string, format: uuid }
+        email:       { type: string, format: email }
+        name:        { type: string }
+        role:        { $ref: '#/components/schemas/UserRole' }
+        locationZip: { type: string }
+        licensed:    { type: boolean }
+        createdAt:   { type: string, format: date-time }
+
+    Listing:
+      type: object
+      required: [id, producerId, title, category, quantityAvailable, locationZip, images, isAvailable, createdAt]
+      properties:
+        id:                { type: string, format: uuid }
+        producerId:        { type: string, format: uuid }
+        title:             { type: string }
+        description:       { type: string }
+        category:          { $ref: '#/components/schemas/ListingCategory' }
+        priceCents:        { type: integer, nullable: true }
+        quantityAvailable: { type: integer }
+        exchangeFor:       { type: string, nullable: true }
+        locationZip:       { type: string }
+        images:            { type: array, items: { type: string, format: uri } }
+        isAvailable:       { type: boolean }
+        distanceMiles:     { type: number }
+        createdAt:         { type: string, format: date-time }
+
+    Order:
+      type: object
+      required: [id, consumerId, status, subtotalCents, feePercent, platformFeeCents, totalCents, createdAt]
+      properties:
+        id:               { type: string, format: uuid }
+        consumerId:       { type: string, format: uuid }
+        status:           { type: string, enum: [pending, paid, fulfilled, cancelled] }
+        items:
+          type: array
+          items:
+            type: object
+            required: [id, listingId, quantity, unitPriceCents]
+            properties:
+              id:            { type: string, format: uuid }
+              listingId:     { type: string, format: uuid }
+              quantity:      { type: integer }
+              unitPriceCents:{ type: integer }
+        subtotalCents:    { type: integer }
+        feePercent:       { type: number }
+        platformFeeCents: { type: integer }
+        totalCents:       { type: integer }
+        createdAt:        { type: string, format: date-time }
+
+    FutureOrder:
+      type: object
+      required: [id, consumerId, productQuery, productKeyword, quantityNeeded, unit, proximityMiles, zip, expiresAt, status, createdAt]
+      properties:
+        id:               { type: string, format: uuid }
+        consumerId:       { type: string, format: uuid }
+        productQuery:     { type: string }
+        productKeyword:   { type: string }
+        category:         { $ref: '#/components/schemas/ListingCategory' }
+        quantityNeeded:   { type: number }
+        unit:             { type: string }
+        maxPriceCents:    { type: integer, nullable: true }
+        proximityMiles:   { type: integer }
+        zip:              { type: string }
+        expiresAt:        { type: string, format: date-time }
+        status:           { type: string, enum: [open, matched, expired, cancelled] }
+        matchedListingId: { type: string, format: uuid, nullable: true }
+        createdAt:        { type: string, format: date-time }
+
+    AISearchRequest:
+      type: object
+      required: [query]
+      properties:
+        query:       { type: string, minLength: 1, maxLength: 500 }
+        userZip:     { type: string }
+        radiusMiles: { type: integer, default: 25 }
+
+    AISearchResponse:
+      type: object
+      required: [intent, results, explanation]
+      properties:
+        intent:      { type: string }
+        results:     { type: array, items: { $ref: '#/components/schemas/Listing' } }
+        explanation: { type: string }
+
+    AIParseDemandResponse:
+      type: object
+      required: [productKeyword, quantityNeeded, unit, proximityMiles, expiresAt]
+      properties:
+        productKeyword:  { type: string }
+        category:        { $ref: '#/components/schemas/ListingCategory' }
+        quantityNeeded:  { type: number }
+        unit:            { type: string }
+        maxPriceCents:   { type: integer, nullable: true }
+        proximityMiles:  { type: integer }
+        expiresAt:       { type: string, format: date-time }
+
+    Error:
+      type: object
+      required: [error]
+      properties:
+        error:
+          type: object
+          required: [code, message]
+          properties:
+            code:    { type: string }
+            message: { type: string }
+            details: {}
+
+  responses:
+    Unauthorized:
+      description: Missing or invalid JWT
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/Error' }
+    Forbidden:
+      description: Authenticated but insufficient role
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/Error' }
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/Error' }
+    NotImplemented:
+      description: Endpoint stubbed — not yet implemented
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/Error' }
+
+paths:
+
+  # ── Auth ─────────────────────────────────────────────────────────────────────
+  /auth/register:
+    post:
+      tags: [auth]
+      summary: Register a new user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email, password, name, role]
+              properties:
+                email:       { type: string, format: email }
+                password:    { type: string, minLength: 8 }
+                name:        { type: string }
+                role:        { $ref: '#/components/schemas/UserRole' }
+                locationZip: { type: string }
+      responses:
+        "201":
+          description: User registered
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  accessToken:  { type: string }
+                  refreshToken: { type: string }
+                  user:         { $ref: '#/components/schemas/User' }
+        "409":
+          description: Email already in use
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+
+  /auth/login:
+    post:
+      tags: [auth]
+      summary: Log in and receive tokens
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email, password]
+              properties:
+                email:    { type: string, format: email }
+                password: { type: string }
+      responses:
+        "200":
+          description: Login successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  accessToken:  { type: string }
+                  refreshToken: { type: string }
+                  user:         { $ref: '#/components/schemas/User' }
+        "401":
+          description: Invalid credentials
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+
+  /auth/refresh:
+    post:
+      tags: [auth]
+      summary: Rotate refresh token and issue new access token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [refreshToken]
+              properties:
+                refreshToken: { type: string }
+      responses:
+        "200":
+          description: New tokens issued
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  accessToken:  { type: string }
+                  refreshToken: { type: string }
+        "401": { $ref: '#/components/responses/Unauthorized' }
+
+  /auth/logout:
+    post:
+      tags: [auth]
+      summary: Invalidate refresh token
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [refreshToken]
+              properties:
+                refreshToken: { type: string }
+      responses:
+        "204":
+          description: Logged out
+
+  # ── Users ─────────────────────────────────────────────────────────────────────
+  /users/me:
+    get:
+      tags: [users]
+      summary: Get current user profile
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Current user
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/User' }
+        "401": { $ref: '#/components/responses/Unauthorized' }
+    patch:
+      tags: [users]
+      summary: Update current user profile
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:        { type: string }
+                locationZip: { type: string }
+      responses:
+        "200":
+          description: Updated user
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/User' }
+        "401": { $ref: '#/components/responses/Unauthorized' }
+
+  # ── Listings ──────────────────────────────────────────────────────────────────
+  /listings:
+    get:
+      tags: [listings]
+      summary: Search and browse listings
+      parameters:
+        - { in: query, name: q,            schema: { type: string } }
+        - { in: query, name: zip,          schema: { type: string } }
+        - { in: query, name: radius_miles, schema: { type: integer, default: 25 } }
+        - { in: query, name: category,     schema: { $ref: '#/components/schemas/ListingCategory' } }
+        - { in: query, name: max_price_cents, schema: { type: integer } }
+        - { in: query, name: allow_exchange,  schema: { type: boolean } }
+        - { in: query, name: page,  schema: { type: integer, default: 1 } }
+        - { in: query, name: limit, schema: { type: integer, default: 20, maximum: 100 } }
+      responses:
+        "200":
+          description: Paginated listing results
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:  { type: array, items: { $ref: '#/components/schemas/Listing' } }
+                  total: { type: integer }
+                  page:  { type: integer }
+                  limit: { type: integer }
+    post:
+      tags: [listings]
+      summary: Create a new listing (producer only)
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required: [title, category, quantityAvailable, locationZip]
+              properties:
+                title:             { type: string }
+                description:       { type: string }
+                category:          { $ref: '#/components/schemas/ListingCategory' }
+                priceCents:        { type: integer }
+                quantityAvailable: { type: integer }
+                exchangeFor:       { type: string }
+                locationZip:       { type: string }
+                images:
+                  type: array
+                  items: { type: string, format: binary }
+      responses:
+        "201":
+          description: Listing created
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Listing' }
+        "401": { $ref: '#/components/responses/Unauthorized' }
+        "403": { $ref: '#/components/responses/Forbidden' }
+
+  /listings/{id}:
+    parameters:
+      - { in: path, name: id, required: true, schema: { type: string, format: uuid } }
+    get:
+      tags: [listings]
+      summary: Get a single listing by ID
+      responses:
+        "200":
+          description: Listing detail
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Listing' }
+        "404": { $ref: '#/components/responses/NotFound' }
+    put:
+      tags: [listings]
+      summary: Update listing (owning producer only)
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [title]
+              properties:
+                title:             { type: string }
+                description:       { type: string }
+                priceCents:        { type: integer }
+                quantityAvailable: { type: integer }
+      responses:
+        "200":
+          description: Updated listing
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Listing' }
+        "401": { $ref: '#/components/responses/Unauthorized' }
+        "403": { $ref: '#/components/responses/Forbidden' }
+        "404": { $ref: '#/components/responses/NotFound' }
+    delete:
+      tags: [listings]
+      summary: Soft-delete listing (owning producer only)
+      security:
+        - bearerAuth: []
+      responses:
+        "204":
+          description: Deleted
+        "401": { $ref: '#/components/responses/Unauthorized' }
+        "403": { $ref: '#/components/responses/Forbidden' }
+
+  /listings/{id}/publish:
+    parameters:
+      - { in: path, name: id, required: true, schema: { type: string, format: uuid } }
+    patch:
+      tags: [listings]
+      summary: Publish or unpublish a listing
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [isAvailable]
+              properties:
+                isAvailable: { type: boolean }
+      responses:
+        "200":
+          description: Listing availability updated
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Listing' }
+        "401": { $ref: '#/components/responses/Unauthorized' }
+        "403": { $ref: '#/components/responses/Forbidden' }
+
+  # ── Orders ────────────────────────────────────────────────────────────────────
+  /orders:
+    get:
+      tags: [orders]
+      summary: List orders for current user
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Order list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data: { type: array, items: { $ref: '#/components/schemas/Order' } }
+        "401": { $ref: '#/components/responses/Unauthorized' }
+    post:
+      tags: [orders]
+      summary: Create order and Stripe PaymentIntent
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [items]
+              properties:
+                items:
+                  type: array
+                  minItems: 1
+                  items:
+                    type: object
+                    required: [listingId, quantity]
+                    properties:
+                      listingId: { type: string, format: uuid }
+                      quantity:  { type: integer, minimum: 1 }
+      responses:
+        "201":
+          description: Order created with Stripe client secret
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [orderId, subtotalCents, feePercent, platformFeeCents, totalCents, stripeClientSecret]
+                properties:
+                  orderId:            { type: string, format: uuid }
+                  subtotalCents:      { type: integer }
+                  feePercent:         { type: number }
+                  platformFeeCents:   { type: integer }
+                  totalCents:         { type: integer }
+                  stripeClientSecret: { type: string }
+        "401": { $ref: '#/components/responses/Unauthorized' }
+        "422":
+          description: Insufficient stock or listing unavailable
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+
+  /orders/{id}/confirm:
+    parameters:
+      - { in: path, name: id, required: true, schema: { type: string, format: uuid } }
+    post:
+      tags: [orders]
+      summary: Confirm payment and decrement stock
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Order confirmed and stock decremented
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Order' }
+        "401": { $ref: '#/components/responses/Unauthorized' }
+        "404": { $ref: '#/components/responses/NotFound' }
+
+  # ── Subscriptions (P1 stub) ───────────────────────────────────────────────────
+  /subscriptions:
+    post:
+      tags: [subscriptions]
+      summary: Create a recurring subscription (P1)
+      security:
+        - bearerAuth: []
+      responses:
+        "501": { $ref: '#/components/responses/NotImplemented' }
+    get:
+      tags: [subscriptions]
+      summary: List subscriptions for current user (P1)
+      security:
+        - bearerAuth: []
+      responses:
+        "501": { $ref: '#/components/responses/NotImplemented' }
+
+  # ── Exchanges (P2 stub) ───────────────────────────────────────────────────────
+  /exchanges:
+    post:
+      tags: [exchanges]
+      summary: Propose a barter exchange (P2)
+      security:
+        - bearerAuth: []
+      responses:
+        "501": { $ref: '#/components/responses/NotImplemented' }
+
+  # ── Future Orders ─────────────────────────────────────────────────────────────
+  /future-orders:
+    get:
+      tags: [future-orders]
+      summary: List current user's demand signals
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Future orders list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data: { type: array, items: { $ref: '#/components/schemas/FutureOrder' } }
+        "401": { $ref: '#/components/responses/Unauthorized' }
+    post:
+      tags: [future-orders]
+      summary: Save confirmed demand signal as open
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [productQuery, productKeyword, quantityNeeded, unit, proximityMiles, zip, expiresAt]
+              properties:
+                productQuery:   { type: string }
+                productKeyword: { type: string }
+                category:       { $ref: '#/components/schemas/ListingCategory' }
+                quantityNeeded: { type: number }
+                unit:           { type: string }
+                maxPriceCents:  { type: integer }
+                proximityMiles: { type: integer, default: 25 }
+                zip:            { type: string }
+                expiresAt:      { type: string, format: date-time }
+      responses:
+        "201":
+          description: Future order saved
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/FutureOrder' }
+        "401": { $ref: '#/components/responses/Unauthorized' }
+
+  /future-orders/{id}:
+    parameters:
+      - { in: path, name: id, required: true, schema: { type: string, format: uuid } }
+    delete:
+      tags: [future-orders]
+      summary: Cancel an open demand signal
+      security:
+        - bearerAuth: []
+      responses:
+        "204":
+          description: Cancelled
+        "401": { $ref: '#/components/responses/Unauthorized' }
+        "403": { $ref: '#/components/responses/Forbidden' }
+
+  # ── Admin ──────────────────────────────────────────────────────────────────────
+  /admin/config:
+    get:
+      tags: [admin]
+      summary: Get platform configuration (public read)
+      responses:
+        "200":
+          description: Config values
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: { type: string }
+    patch:
+      tags: [admin]
+      summary: Update platform config (admin only)
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                feePercent: { type: number, minimum: 0, maximum: 100 }
+      responses:
+        "200":
+          description: Updated config
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: { type: string }
+        "401": { $ref: '#/components/responses/Unauthorized' }
+        "403": { $ref: '#/components/responses/Forbidden' }
+
+  # ── AI ────────────────────────────────────────────────────────────────────────
+  /ai/search:
+    post:
+      tags: [ai]
+      summary: Natural-language product search — FR-08 (P0)
+      description: |
+        Sends user prompt to Claude with search_listings tool.
+        Falls back to keyword search if Claude is unavailable.
+        Rate-limited: 20 requests/user/hour.
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/AISearchRequest' }
+      responses:
+        "200":
+          description: AI search results
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/AISearchResponse' }
+        "401": { $ref: '#/components/responses/Unauthorized' }
+        "429":
+          description: Rate limit exceeded
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+
+  /ai/parse-demand:
+    post:
+      tags: [ai]
+      summary: Parse free-text demand intent for Future Orders — FR-11 (P1)
+      description: |
+        Returns structured intent for consumer to confirm before saving.
+        Does NOT write to DB — the client calls POST /future-orders to persist.
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [query, zip]
+              properties:
+                query: { type: string, minLength: 1, maxLength: 500 }
+                zip:   { type: string }
+      responses:
+        "200":
+          description: Parsed demand intent
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/AIParseDemandResponse' }
+        "401": { $ref: '#/components/responses/Unauthorized' }
+        "403": { $ref: '#/components/responses/Forbidden' }
