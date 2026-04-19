@@ -54,8 +54,10 @@ export default function FutureOrderPage() {
     setSaving(true);
     setSaveError('');
     try {
-      const expiresAt = intent.needed_by_date
-        ? intent.needed_by_date
+      // expires_at must always be in the future — if needed_by_date is stale or missing, default to 7 days
+      const neededDate = intent.needed_by_date ? new Date(intent.needed_by_date) : null;
+      const expiresAt = neededDate && neededDate.getTime() > Date.now()
+        ? neededDate.toISOString()
         : addDays(new Date(), 7).toISOString();
 
       await apiClient.post('/future-orders', {

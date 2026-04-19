@@ -1,31 +1,42 @@
-import Anthropic from '@anthropic-ai/sdk';
+import OpenAI from 'openai';
 import fs from 'fs';
 import path from 'path';
-import { isValid, parseISO } from 'date-fns';
+import { format, isValid, parseISO } from 'date-fns';
 import { env } from '../config/env';
 
-const client = new Anthropic({ apiKey: env.anthropicApiKey });
+const client = new OpenAI({ apiKey: env.openaiApiKey });
 
-const SYSTEM_PROMPT = fs.readFileSync(
+const SYSTEM_PROMPT_TEMPLATE = fs.readFileSync(
   path.join(__dirname, '../prompts/demandParseSystem.txt'),
   'utf-8'
 );
 
-const DEMAND_TOOL: Anthropic.Tool = {
-  name: 'create_future_order',
-  description: 'Parse a consumer demand into structured fields for a future order',
-  input_schema: {
-    type: 'object' as const,
-    properties: {
-      product_keyword:  { type: 'string', description: 'Primary produce item, lowercase singular' },
-      quantity:         { type: 'number', description: 'Amount needed' },
-      unit:             { type: 'string', description: 'Unit of measure: lb, kg, dozen, unit, bunch, bag' },
-      needed_by_date:   { type: 'string', description: 'ISO 8601 UTC datetime when produce is needed' },
-      max_price_cents:  { type: 'number', description: 'Maximum price in cents' },
-      zip:              { type: 'string', description: '5-digit US ZIP code from message' },
-      proximity_miles:  { type: 'number', description: 'Search radius in miles, default 25' },
+function buildSystemPrompt(): string {
+  const today = format(new Date(), 'yyyy-MM-dd');
+  const year = new Date().getFullYear().toString();
+  return SYSTEM_PROMPT_TEMPLATE
+    .replace(/\{\{TODAY\}\}/g, today)
+    .replace(/\{\{YEAR\}\}/g, year);
+}
+
+const DEMAND_TOOL: OpenAI.Chat.Completions.ChatCompletionTool = {
+  type: 'function',
+  function: {
+    name: 'create_future_order',
+    description: 'Parse a consumer demand into structured fields for a future order',
+    parameters: {
+      type: 'object',
+      properties: {
+        product_keyword:  { type: 'string', description: 'Primary produce item, lowercase singular' },
+        quantity:         { type: 'number', description: 'Amount needed' },
+        unit:             { type: 'string', description: 'Unit of measure: lb, kg, dozen, unit, bunch, bag' },
+        needed_by_date:   { type: 'string', description: 'ISO 8601 UTC datetime when produce is needed' },
+        max_price_cents:  { type: 'number', description: 'Maximum price in cents' },
+        zip:              { type: 'string', description: '5-digit US ZIP code from message' },
+        proximity_miles:  { type: 'number', description: 'Search radius in miles, default 25' },
+      },
+      required: ['product_keyword', 'quantity', 'unit'],
     },
-    required: ['product_keyword', 'quantity', 'unit'],
   },
 };
 
@@ -48,21 +59,21 @@ export class DemandParseError extends Error {
 
 export async function parseDemandIntent(query: string): Promise<DemandIntent> {
   try {
-    const response = await client.messages.create({
-      model: 'claude-haiku-4-5-20251001',
+    const response = await client.chat.completions.create({
+      model: 'gpt-4o-mini',
       max_tokens: 512,
-      system: SYSTEM_PROMPT,
+      messages: [
+        { role: 'system', content: buildSystemPrompt() },
+        { role: 'user',   content: query },
+      ],
       tools: [DEMAND_TOOL],
-      tool_choice: { type: 'tool', name: 'create_future_order' },
-      messages: [{ role: 'user', content: query }],
+      tool_choice: { type: 'function', function: { name: 'create_future_order' } },
     });
 
-    const toolUse = response.content.find(
-      (b): b is Anthropic.ToolUseBlock => b.type === 'tool_use'
-    );
-    if (!toolUse) throw new DemandParseError('Claude returned no tool call');
+    const toolCall = response.choices[0]?.message?.tool_calls?.[0];
+    if (!toolCall || toolCall.type !== 'function') throw new DemandParseError('OpenAI returned no tool call');
 
-    const input = toolUse.input as {
+    const input = JSON.parse(toolCall.function.arguments) as {
       product_keyword: string;
       quantity: number;
       unit: string;
@@ -72,11 +83,13 @@ export async function parseDemandIntent(query: string): Promise<DemandIntent> {
       proximity_miles?: number;
     };
 
-    // Validate ISO date if present
+    // Validate ISO date — must be valid and in the future
     let needed_by_date: string | null = null;
     if (input.needed_by_date) {
       const parsed = parseISO(input.needed_by_date);
-      needed_by_date = isValid(parsed) ? input.needed_by_date : null;
+      needed_by_date = isValid(parsed) && parsed.getTime() > Date.now()
+        ? input.needed_by_date
+        : null;
     }
 
     return {
@@ -90,10 +103,9 @@ export async function parseDemandIntent(query: string): Promise<DemandIntent> {
     };
   } catch (err) {
     if (err instanceof DemandParseError) throw err;
-    // Don't leak raw API error details (e.g. Anthropic auth errors) to callers
     const isApiKeyError =
       err instanceof Error &&
-      (err.message.includes('x-api-key') || err.message.includes('authentication_error'));
+      (err.message.includes('api_key') || err.message.includes('authentication') || err.message.includes('401'));
     throw new DemandParseError(
       isApiKeyError ? 'AI service is unavailable' : 'Failed to parse demand intent'
     );

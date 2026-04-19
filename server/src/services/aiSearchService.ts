@@ -1,29 +1,32 @@
-import Anthropic from '@anthropic-ai/sdk';
+import OpenAI from 'openai';
 import fs from 'fs';
 import path from 'path';
 import { env } from '../config/env';
 import { searchListings, ListingRow } from './listingService';
 
-const client = new Anthropic({ apiKey: env.anthropicApiKey });
+const client = new OpenAI({ apiKey: env.openaiApiKey });
 
 const SYSTEM_PROMPT = fs.readFileSync(
   path.join(__dirname, '../prompts/searchSystem.txt'),
   'utf-8'
 );
 
-const SEARCH_TOOL: Anthropic.Tool = {
-  name: 'search_listings',
-  description: 'Search produce listings by keyword, location, and filters',
-  input_schema: {
-    type: 'object' as const,
-    properties: {
-      keyword:      { type: 'string', description: 'Product name or type to search for' },
-      category:     { type: 'string', enum: ['vegetable', 'fruit', 'flower', 'egg', 'other'] },
-      zip:          { type: 'string', description: '5-digit US ZIP code for proximity search' },
-      radius_miles: { type: 'number', description: 'Search radius in miles (default 25)' },
-      max_price:    { type: 'number', description: 'Maximum price in cents' },
+const SEARCH_TOOL: OpenAI.Chat.Completions.ChatCompletionTool = {
+  type: 'function',
+  function: {
+    name: 'search_listings',
+    description: 'Search produce listings by keyword, location, and filters',
+    parameters: {
+      type: 'object',
+      properties: {
+        keyword:      { type: 'string', description: 'Product name or type to search for' },
+        category:     { type: 'string', enum: ['vegetable', 'fruit', 'flower', 'egg', 'other'] },
+        zip:          { type: 'string', description: '5-digit US ZIP code for proximity search' },
+        radius_miles: { type: 'number', description: 'Search radius in miles (default 25)' },
+        max_price:    { type: 'number', description: 'Maximum price in cents' },
+      },
+      required: ['keyword'],
     },
-    required: ['keyword'],
   },
 };
 
@@ -44,21 +47,21 @@ export async function aiSearch({ query, userZip }: AISearchParams): Promise<AISe
       ? `User ZIP: ${userZip}\nQuery: ${query}`
       : `Query: ${query}`;
 
-    const response = await client.messages.create({
-      model: 'claude-haiku-4-5-20251001',
+    const response = await client.chat.completions.create({
+      model: 'gpt-4o-mini',
       max_tokens: 1024,
-      system: SYSTEM_PROMPT,
+      messages: [
+        { role: 'system', content: SYSTEM_PROMPT },
+        { role: 'user',   content: userContent },
+      ],
       tools: [SEARCH_TOOL],
-      tool_choice: { type: 'tool', name: 'search_listings' },
-      messages: [{ role: 'user', content: userContent }],
+      tool_choice: { type: 'function', function: { name: 'search_listings' } },
     });
 
-    const toolUse = response.content.find(
-      (b): b is Anthropic.ToolUseBlock => b.type === 'tool_use'
-    );
-    if (!toolUse) throw new Error('Claude returned no tool call');
+    const toolCall = response.choices[0]?.message?.tool_calls?.[0];
+    if (!toolCall || toolCall.type !== 'function') throw new Error('OpenAI returned no tool call');
 
-    const input = toolUse.input as {
+    const input = JSON.parse(toolCall.function.arguments) as {
       keyword: string;
       category?: string;
       zip?: string;

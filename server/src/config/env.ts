@@ -11,7 +11,7 @@ export const env = {
   jwtAccessTtl:    parseInt(process.env.JWT_ACCESS_TTL_SECONDS ?? '900'),
   jwtRefreshTtlDays: parseInt(process.env.JWT_REFRESH_TTL_DAYS ?? '30'),
   stripeSecretKey: process.env.STRIPE_SECRET_KEY ?? '',
-  anthropicApiKey: process.env.ANTHROPIC_API_KEY ?? '',
+  openaiApiKey:    process.env.OPENAI_API_KEY ?? '',
   sendgridApiKey:  process.env.SENDGRID_API_KEY ?? '',
   webBaseUrl:      process.env.WEB_BASE_URL ?? 'http://localhost:5173',
   port:            parseInt(process.env.PORT ?? '3000'),
