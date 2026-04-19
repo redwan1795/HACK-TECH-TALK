@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { apiClient } from '../lib/api';
 import { ListingCard } from '../components/ListingCard';
 import { useCartStore } from '../stores/cartStore';
+import { NavHeader } from '../components/NavHeader';
 import type { AISearchResponse, Listing } from '@community-garden/types';
 
 
@@ -70,6 +71,7 @@ export default function AISearchPage() {
 
   return (
     <div className="min-h-screen bg-garden-50">
+      <NavHeader />
       <div className="max-w-3xl mx-auto px-4 py-10 space-y-6">
         <div className="text-center space-y-1">
           <h1 className="text-3xl font-bold text-garden-700">Find Fresh Produce</h1>

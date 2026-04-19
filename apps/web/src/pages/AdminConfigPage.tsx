@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { apiClient } from '../lib/api';
+import { NavHeader } from '../components/NavHeader';
 
 export default function AdminConfigPage() {
   const queryClient = useQueryClient();
@@ -49,6 +50,7 @@ export default function AdminConfigPage() {
 
   return (
     <div className="min-h-screen bg-garden-50">
+      <NavHeader />
       <div className="max-w-lg mx-auto px-4 py-10">
         <h1 className="text-2xl font-bold text-garden-700 mb-6">Platform Configuration</h1>
 

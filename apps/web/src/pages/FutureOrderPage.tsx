@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { addDays, format, parseISO } from 'date-fns';
 import { apiClient } from '../lib/api';
+import { NavHeader } from '../components/NavHeader';
 
 interface DemandIntent {
   product_keyword: string;
@@ -165,7 +166,9 @@ export default function FutureOrderPage() {
   }
 
   return (
-    <div className="min-h-screen bg-garden-50 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-garden-50">
+      <NavHeader />
+      <div className="flex items-center justify-center p-4">
       <div className="bg-white rounded-2xl shadow-lg p-8 max-w-md w-full">
         <h2 className="text-2xl font-bold text-garden-700 mb-1">Post a future request</h2>
         <p className="text-sm text-gray-500 mb-6">
@@ -197,6 +200,7 @@ export default function FutureOrderPage() {
             View my existing requests →
           </Link>
         </div>
+      </div>
       </div>
     </div>
   );

@@ -3,6 +3,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuthStore } from '../stores/authStore';
+import { NavHeader } from '../components/NavHeader';
 
 const schema = z.object({
   email: z.string().email('Invalid email address'),
@@ -34,7 +35,9 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-garden-50">
+    <div className="min-h-screen bg-garden-50">
+      <NavHeader backHref="/" />
+      <div className="flex items-center justify-center py-8 px-4">
       <div className="w-full max-w-md p-8 bg-white rounded-2xl shadow-md">
         <div className="text-center mb-6">
           <div className="text-4xl mb-2">🌱</div>
@@ -84,6 +87,7 @@ export default function LoginPage() {
             Register
           </Link>
         </p>
+      </div>
       </div>
     </div>
   );

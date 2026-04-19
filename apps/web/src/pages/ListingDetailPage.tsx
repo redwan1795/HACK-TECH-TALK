@@ -5,6 +5,7 @@ import { apiClient } from '../lib/api';
 import { useCartStore } from '../stores/cartStore';
 import { useAuthStore } from '../stores/authStore';
 import { SubscriptionModal } from '../components/SubscriptionModal';
+import { NavHeader } from '../components/NavHeader';
 import type { Listing } from '@community-garden/types';
 
 const API_BASE = (import.meta as any).env?.VITE_API_URL?.replace('/api/v1', '') ?? 'http://localhost:3000';
@@ -55,6 +56,7 @@ export default function ListingDetailPage() {
   if (isLoading) {
     return (
       <div className="min-h-screen bg-garden-50">
+        <NavHeader />
         <div className="max-w-2xl mx-auto px-4 py-10 space-y-4">
           <div className="h-64 bg-gray-100 rounded-2xl animate-pulse" />
           <div className="h-6 bg-gray-100 rounded w-2/3 animate-pulse" />
@@ -67,12 +69,15 @@ export default function ListingDetailPage() {
 
   if (isError || !data) {
     return (
-      <div className="min-h-screen bg-garden-50 flex items-center justify-center">
-        <div className="text-center p-8">
-          <p className="text-gray-500">Listing not found.</p>
-          <Link to="/browse" className="mt-4 inline-block text-garden-600 underline text-sm">
-            Browse all listings
-          </Link>
+      <div className="min-h-screen bg-garden-50">
+        <NavHeader />
+        <div className="flex items-center justify-center py-20">
+          <div className="text-center p-8">
+            <p className="text-gray-500">Listing not found.</p>
+            <Link to="/browse" className="mt-4 inline-block text-garden-600 underline text-sm">
+              Browse all listings
+            </Link>
+          </div>
         </div>
       </div>
     );
@@ -91,6 +96,7 @@ export default function ListingDetailPage() {
 
   return (
     <div className="min-h-screen bg-garden-50">
+      <NavHeader />
       <div className="max-w-2xl mx-auto px-4 py-10 space-y-6">
         <Link to="/browse" className="text-sm text-garden-600 hover:underline">
           ← Back to listings

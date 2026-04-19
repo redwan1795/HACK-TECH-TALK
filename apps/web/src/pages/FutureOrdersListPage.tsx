@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { format, parseISO } from 'date-fns';
 import { apiClient } from '../lib/api';
+import { NavHeader } from '../components/NavHeader';
 
 interface FutureOrder {
   id: string;
@@ -43,8 +44,9 @@ export default function FutureOrdersListPage() {
   });
 
   return (
-    <div className="min-h-screen bg-garden-50 p-6">
-      <div className="max-w-2xl mx-auto">
+    <div className="min-h-screen bg-garden-50">
+      <NavHeader />
+      <div className="max-w-2xl mx-auto p-6">
         <div className="flex items-center justify-between mb-6">
           <h1 className="text-2xl font-bold text-garden-700">My Future Requests</h1>
           <Link
