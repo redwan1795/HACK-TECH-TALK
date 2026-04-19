@@ -120,7 +120,7 @@ export default function LandingPage() {
       </section>
 
       {/* Did You Know stats */}
-      <section className="max-w-5xl mx-auto w-full px-6 pb-16 grid sm:grid-cols-2 gap-6">
+      <section className="max-w-5xl mx-auto w-full px-6 pb-16 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
         <div className="bg-garden-700 text-white rounded-2xl p-6 flex flex-col gap-3">
           <p className="text-xs font-bold uppercase tracking-widest text-garden-200">Did you know?</p>
           <p className="text-sm leading-relaxed">
@@ -142,6 +142,17 @@ export default function LandingPage() {
           </p>
           <p className="text-amber-200 text-xs font-medium mt-auto pt-3 border-t border-amber-500">
             Start buying and selling here in Community Garden.
+          </p>
+        </div>
+
+        <div className="bg-emerald-700 text-white rounded-2xl p-6 flex flex-col gap-3">
+          <p className="text-xs font-bold uppercase tracking-widest text-emerald-200">Did you know?</p>
+          <p className="text-sm leading-relaxed">
+            <span className="font-extrabold text-2xl text-white block mb-1">$1.60</span>
+            in total local economic activity is generated for every <strong>$1 spent on local food</strong> — keeping wealth circulating in your community.
+          </p>
+          <p className="text-emerald-200 text-xs font-medium mt-auto pt-3 border-t border-emerald-600">
+            Produce and buy locally — contribute to the economy.
           </p>
         </div>
       </section>
