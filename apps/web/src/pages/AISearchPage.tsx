@@ -5,6 +5,8 @@ import { ListingCard } from '../components/ListingCard';
 import { useCartStore } from '../stores/cartStore';
 import type { AISearchResponse, Listing } from '@community-garden/types';
 
+
+
 function SkeletonCard() {
   return (
     <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-4 animate-pulse space-y-3">
@@ -45,6 +47,9 @@ export default function AISearchPage() {
   const [result, setResult] = useState<AISearchResponse | null>(null);
   const [error, setError] = useState<string | null>(null);
   const addItem = useCartStore((s) => s.addItem);
+  const setLastAISearch = useCartStore((s) => s.setLastAISearch);
+  const lastAISearchResults = useCartStore((s) => s.lastAISearchResults);
+  const lastAISearchQuery = useCartStore((s) => s.lastAISearchQuery);
 
   const handleSearch = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -55,6 +60,7 @@ export default function AISearchPage() {
     try {
       const res = await apiClient.post<AISearchResponse>('/ai/search', { query: query.trim() });
       setResult(res.data);
+      setLastAISearch(query.trim(), res.data);
     } catch {
       setError('Search failed. Please try again.');
     } finally {
@@ -88,11 +94,44 @@ export default function AISearchPage() {
         </form>
 
         {error && (
-          <div className="bg-red-50 border border-red-100 rounded-xl px-4 py-3 text-sm text-red-700 flex items-center justify-between">
-            <span>{error}</span>
-            <Link to="/browse" className="underline text-red-600 shrink-0 ml-3">
-              Try standard search →
-            </Link>
+          <div className="space-y-3">
+            <div className="bg-red-50 border border-red-100 rounded-xl px-4 py-3 text-sm text-red-700 flex items-center justify-between">
+              <span>{error}</span>
+              <Link to="/browse" className="underline text-red-600 shrink-0 ml-3">
+                Try standard search →
+              </Link>
+            </div>
+            {lastAISearchResults && lastAISearchQuery && (
+              <div className="space-y-3">
+                <div className="bg-yellow-50 border border-yellow-200 rounded-xl px-4 py-2 text-sm text-yellow-800">
+                  Showing cached results from your last search — "{lastAISearchQuery}"
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {lastAISearchResults.results.map((raw: any) => {
+                    const listing = toListingShape(raw);
+                    return (
+                      <ListingCard
+                        key={listing.id}
+                        id={listing.id}
+                        title={listing.title}
+                        description={listing.description}
+                        category={listing.category}
+                        price_cents={listing.priceCents}
+                        quantity_available={listing.quantityAvailable}
+                        location_zip={listing.locationZip}
+                        images={listing.images}
+                        ready_to_deliver={listing.readyToDeliver}
+                        pickup_date={listing.pickupDate}
+                        pickup_time={listing.pickupTime}
+                        pickup_location={listing.pickupLocation}
+                        distance_miles={listing.distanceMiles}
+                        onAddToCart={() => addItem(listing, 1)}
+                      />
+                    );
+                  })}
+                </div>
+              </div>
+            )}
           </div>
         )}
 

@@ -33,11 +33,9 @@ const app = createApp();
 
 // M3 implemented: /api/v1/orders, /api/v1/ai/search, /api/v1/admin/config
 // M4 implemented: /api/v1/future-orders, /api/v1/ai/parse-demand
-// M5 stub: PATCH /admin/config
+// M5 implemented: /api/v1/subscriptions, PATCH /api/v1/admin/config
 const STUB_ROUTES: Array<{ method: 'get' | 'post' | 'put' | 'patch' | 'delete'; path: string }> = [
-  // M5 stubs
-  { method: 'post',   path: '/api/v1/subscriptions' },
-  { method: 'get',    path: '/api/v1/subscriptions' },
+  // Still stubbed
   { method: 'post',   path: '/api/v1/exchanges' },
 ];
 

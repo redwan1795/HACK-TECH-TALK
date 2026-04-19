@@ -1,8 +1,9 @@
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import DashboardPage from './pages/DashboardPage';
 import ListingsPage from './pages/ListingsPage';
+import ListingDetailPage from './pages/ListingDetailPage';
 import CreateListingPage from './pages/CreateListingPage';
 import ProducerDashboard from './pages/ProducerDashboard';
 import LandingPage from './pages/LandingPage';
@@ -14,15 +15,21 @@ import OrderConfirmationPage from './pages/OrderConfirmationPage';
 import OrdersListPage from './pages/OrdersListPage';
 import FutureOrderPage from './pages/FutureOrderPage';
 import FutureOrdersListPage from './pages/FutureOrdersListPage';
+import AdminConfigPage from './pages/AdminConfigPage';
+import BrokerDashboardPage from './pages/BrokerDashboardPage';
+import NotFoundPage from './pages/NotFoundPage';
 import { ProtectedRoute } from './components/ProtectedRoute';
+import { ErrorBoundary } from './components/ErrorBoundary';
 
-function PlaceholderPage({ name }: { name: string }) {
+function ExchangePlaceholder() {
   return (
-    <div className="flex items-center justify-center min-h-screen bg-garden-50">
-      <div className="text-center p-8">
-        <div className="text-5xl mb-4">🌱</div>
-        <h1 className="text-3xl font-bold text-garden-700 mb-2">Community Garden</h1>
-        <p className="text-gray-500">{name}</p>
+    <div className="min-h-screen bg-garden-50 flex items-center justify-center">
+      <div className="text-center p-8 max-w-md">
+        <div className="text-5xl mb-4">🔄</div>
+        <h1 className="text-2xl font-bold text-garden-700">Exchange</h1>
+        <p className="text-gray-500 mt-2 text-sm">
+          Produce exchange marketplace coming soon.
+        </p>
       </div>
     </div>
   );
@@ -43,16 +50,25 @@ export default function App() {
         <ProtectedRoute><DashboardPage /></ProtectedRoute>
       } />
       <Route path="/search" element={
-        <ProtectedRoute><AISearchPage /></ProtectedRoute>
+        <ProtectedRoute>
+          <ErrorBoundary><AISearchPage /></ErrorBoundary>
+        </ProtectedRoute>
       } />
       <Route path="/browse" element={
         <ProtectedRoute><ListingsPage /></ProtectedRoute>
       } />
+      <Route path="/listings/:id" element={
+        <ProtectedRoute><ListingDetailPage /></ProtectedRoute>
+      } />
       <Route path="/checkout/:listingId" element={
-        <ProtectedRoute><CheckoutPage /></ProtectedRoute>
+        <ProtectedRoute>
+          <ErrorBoundary><CheckoutPage /></ErrorBoundary>
+        </ProtectedRoute>
       } />
       <Route path="/checkout" element={
-        <ProtectedRoute><CartCheckoutPage /></ProtectedRoute>
+        <ProtectedRoute>
+          <ErrorBoundary><CartCheckoutPage /></ErrorBoundary>
+        </ProtectedRoute>
       } />
       <Route path="/cart" element={
         <ProtectedRoute><CartPage /></ProtectedRoute>
@@ -69,8 +85,11 @@ export default function App() {
       <Route path="/future-orders" element={
         <ProtectedRoute><FutureOrdersListPage /></ProtectedRoute>
       } />
+      <Route path="/exchange" element={
+        <ProtectedRoute><ExchangePlaceholder /></ProtectedRoute>
+      } />
 
-      {/* Any authenticated user can sell */}
+      {/* Producer */}
       <Route path="/producer/dashboard" element={
         <ProtectedRoute><ProducerDashboard /></ProtectedRoute>
       } />
@@ -78,17 +97,30 @@ export default function App() {
         <ProtectedRoute><CreateListingPage /></ProtectedRoute>
       } />
 
-      {/* Admin only */}
+      {/* Broker */}
+      <Route path="/broker" element={
+        <ProtectedRoute roles={['broker']}>
+          <BrokerDashboardPage />
+        </ProtectedRoute>
+      } />
+
+      {/* Admin */}
       <Route path="/admin" element={
         <ProtectedRoute roles={['admin']}>
-          <PlaceholderPage name="Admin Config — coming in M5" />
+          <AdminConfigPage />
         </ProtectedRoute>
       } />
 
       <Route path="/unauthorized" element={
-        <PlaceholderPage name="403 — You don't have permission to view this page" />
+        <div className="flex items-center justify-center min-h-screen bg-garden-50">
+          <div className="text-center p-8">
+            <div className="text-5xl font-bold text-red-400">403</div>
+            <p className="text-gray-500 mt-2">You don't have permission to view this page.</p>
+          </div>
+        </div>
       } />
-      <Route path="*" element={<Navigate to="/" replace />} />
+
+      <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );
 }

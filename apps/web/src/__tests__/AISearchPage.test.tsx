@@ -10,7 +10,13 @@ vi.mock('../lib/api', () => ({
 
 vi.mock('../stores/cartStore', () => ({
   useCartStore: vi.fn((selector) => {
-    const store = { items: [], addItem: vi.fn() };
+    const store = {
+      items: [],
+      addItem: vi.fn(),
+      lastAISearchResults: null,
+      lastAISearchQuery: null,
+      setLastAISearch: vi.fn(),
+    };
     return selector ? selector(store) : store;
   }),
 }));

@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import type { Listing } from '@community-garden/types';
+import type { Listing, AISearchResponse } from '@community-garden/types';
 
 export interface CartItem {
   listing: Listing;
@@ -14,12 +14,18 @@ interface CartStore {
   updateQuantity: (listingId: string, quantity: number) => void;
   clearCart: () => void;
   subtotal: () => number;
+  lastAISearchResults: AISearchResponse | null;
+  lastAISearchQuery: string | null;
+  setLastAISearch: (query: string, results: AISearchResponse) => void;
 }
 
 export const useCartStore = create<CartStore>()(
   persist(
     (set, get) => ({
       items: [],
+      lastAISearchResults: null,
+      lastAISearchQuery: null,
+      setLastAISearch: (query, results) => set({ lastAISearchQuery: query, lastAISearchResults: results }),
 
       addItem: (listing, quantity = 1) => {
         set((state) => {
