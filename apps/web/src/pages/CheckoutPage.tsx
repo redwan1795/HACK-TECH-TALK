@@ -79,10 +79,19 @@ export default function CheckoutPage() {
   const canPlace = listing.ready_to_deliver ? deliveryAddress.trim().length > 5 : true;
 
   const handlePlaceOrder = async () => {
+    if (!listing || !listingId) return;
     setPlacing(true);
-    // M3 will wire this to POST /orders + Stripe; for now navigate to orders stub
-    await new Promise((r) => setTimeout(r, 400));
-    navigate('/orders');
+    try {
+      const payload = {
+        items: [{ listingId, quantity: qty }],
+        ...(listing.ready_to_deliver && deliveryAddress ? { delivery_address: deliveryAddress } : {}),
+      };
+      const { data } = await apiClient.post('/orders', payload);
+      await apiClient.post(`/orders/${data.orderId}/confirm`);
+      navigate(`/orders/${data.orderId}/confirmation`);
+    } catch {
+      setPlacing(false);
+    }
   };
 
   return (

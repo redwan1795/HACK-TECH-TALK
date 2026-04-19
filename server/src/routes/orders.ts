@@ -70,10 +70,13 @@ router.post(
         subtotalCents += listing.price_cents * item.quantity;
       }
 
-      const { rows: configRows } = await dbQuery(
-        `SELECT value FROM platform_config WHERE key = 'fee_percent'`
-      );
-      const feePercent = configRows.length > 0 ? parseFloat(configRows[0].value) : 7;
+      let feePercent = 7;
+      try {
+        const { rows: configRows } = await dbQuery(
+          `SELECT value FROM platform_config WHERE key = 'fee_percent'`
+        );
+        if (configRows.length > 0) feePercent = parseFloat(configRows[0].value);
+      } catch { /* table may not exist yet — use default 7% */ }
       const platformFeeCents = Math.round(subtotalCents * feePercent / 100);
       const totalCents = subtotalCents + platformFeeCents;
 
