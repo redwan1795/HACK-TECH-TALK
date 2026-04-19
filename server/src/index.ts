@@ -1,10 +1,14 @@
 import 'dotenv/config';
+import path from 'path';
 import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import listingsRouter from './routes/listings';
 import authRouter from './routes/auth';
 import usersRouter from './routes/users';
+import ordersRouter from './routes/orders';
+import aiRouter from './routes/ai';
+import adminRouter from './routes/admin';
 import { errorHandler } from './middleware/errorHandler';
 
 export function createApp() {
@@ -13,6 +17,7 @@ export function createApp() {
   app.use(helmet());
   app.use(cors({ origin: process.env.CORS_ORIGIN ?? 'http://localhost:5173' }));
   app.use(express.json());
+  app.use('/uploads', express.static(path.join(process.cwd(), 'uploads')));
 
   app.get('/health', (_req, res) => {
     res.json({ status: 'ok', timestamp: new Date().toISOString() });
@@ -21,17 +26,17 @@ export function createApp() {
   app.use('/api/v1/auth',          authRouter);
   app.use('/api/v1/users',         usersRouter);
   app.use('/api/v1/listings',      listingsRouter);
+  app.use('/api/v1/orders',        ordersRouter);
+  app.use('/api/v1/ai',            aiRouter);
+  app.use('/api/v1/admin',         adminRouter);
 
   const stub = (_req: express.Request, res: express.Response): void => {
     res.status(501).json({ error: { code: 'NOT_IMPLEMENTED', message: 'Coming in a future milestone' } });
   };
 
-  app.use('/api/v1/orders',        stub);
   app.use('/api/v1/subscriptions', stub);
   app.use('/api/v1/exchanges',     stub);
   app.use('/api/v1/future-orders', stub);
-  app.use('/api/v1/admin',         stub);
-  app.use('/api/v1/ai',            stub);
 
   app.use(errorHandler);
 

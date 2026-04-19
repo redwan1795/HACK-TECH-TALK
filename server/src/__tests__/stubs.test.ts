@@ -21,19 +21,19 @@ jest.mock('../db/client', () => ({
 // Prevent Redis from connecting during these tests
 jest.mock('../db/redis', () => ({
   redisClient: {
-    set: jest.fn().mockResolvedValue(undefined),
+    get:    jest.fn().mockResolvedValue(null),
+    set:    jest.fn().mockResolvedValue(undefined),
     getDel: jest.fn().mockResolvedValue(null),
-    del: jest.fn().mockResolvedValue(undefined),
-    quit: jest.fn().mockResolvedValue(undefined),
+    del:    jest.fn().mockResolvedValue(undefined),
+    quit:   jest.fn().mockResolvedValue(undefined),
   },
 }));
 
 const app = createApp();
 
+// M3 implemented: /api/v1/orders, /api/v1/ai/search, /api/v1/admin/config
+// M5 stub: PATCH /admin/config
 const STUB_ROUTES: Array<{ method: 'get' | 'post' | 'put' | 'patch' | 'delete'; path: string }> = [
-  // M2 stubs
-  { method: 'post',   path: '/api/v1/orders' },
-  { method: 'get',    path: '/api/v1/orders' },
   // M5 stubs
   { method: 'post',   path: '/api/v1/subscriptions' },
   { method: 'get',    path: '/api/v1/subscriptions' },
@@ -41,11 +41,7 @@ const STUB_ROUTES: Array<{ method: 'get' | 'post' | 'put' | 'patch' | 'delete'; 
   // M4 stubs
   { method: 'post',   path: '/api/v1/future-orders' },
   { method: 'get',    path: '/api/v1/future-orders' },
-  // M5 stubs
-  { method: 'get',    path: '/api/v1/admin/config' },
-  { method: 'patch',  path: '/api/v1/admin/config' },
-  // M3 stubs
-  { method: 'post',   path: '/api/v1/ai/search' },
+  // M3 stub (parse-demand is M4)
   { method: 'post',   path: '/api/v1/ai/parse-demand' },
 ];
 
@@ -93,9 +89,9 @@ describe('listings write stubs: no token → 401, wrong role → 403', () => {
     expect(res.status).toBe(401);
   });
 
-  it('GET /api/v1/listings/:id → 501 (public stub, no auth needed)', async () => {
+  it('GET /api/v1/listings/:id → 422 for non-UUID id (M2 handler, no auth needed)', async () => {
     const res = await request(app).get('/api/v1/listings/some-id');
-    expect(res.status).toBe(501);
+    expect(res.status).toBe(422);
   });
 });
 

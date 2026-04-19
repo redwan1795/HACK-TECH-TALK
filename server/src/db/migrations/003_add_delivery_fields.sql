@@ -1,0 +1,5 @@
+ALTER TABLE listings
+  ADD COLUMN IF NOT EXISTS ready_to_deliver BOOLEAN NOT NULL DEFAULT TRUE,
+  ADD COLUMN IF NOT EXISTS pickup_date      DATE,
+  ADD COLUMN IF NOT EXISTS pickup_time      TIME,
+  ADD COLUMN IF NOT EXISTS pickup_location  TEXT;

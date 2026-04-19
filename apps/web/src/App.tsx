@@ -2,6 +2,16 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import DashboardPage from './pages/DashboardPage';
+import ListingsPage from './pages/ListingsPage';
+import CreateListingPage from './pages/CreateListingPage';
+import ProducerDashboard from './pages/ProducerDashboard';
+import LandingPage from './pages/LandingPage';
+import CheckoutPage from './pages/CheckoutPage';
+import AISearchPage from './pages/AISearchPage';
+import CartPage from './pages/CartPage';
+import CartCheckoutPage from './pages/CartCheckoutPage';
+import OrderConfirmationPage from './pages/OrderConfirmationPage';
+import OrdersListPage from './pages/OrdersListPage';
 import { ProtectedRoute } from './components/ProtectedRoute';
 
 function PlaceholderPage({ name }: { name: string }) {
@@ -19,7 +29,10 @@ function PlaceholderPage({ name }: { name: string }) {
 export default function App() {
   return (
     <Routes>
-      {/* Public */}
+      {/* Public landing */}
+      <Route path="/" element={<LandingPage />} />
+
+      {/* Auth */}
       <Route path="/login"    element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
 
@@ -27,36 +40,37 @@ export default function App() {
       <Route path="/dashboard" element={
         <ProtectedRoute><DashboardPage /></ProtectedRoute>
       } />
-      <Route path="/" element={
-        <ProtectedRoute><PlaceholderPage name="AI Search — coming in M3" /></ProtectedRoute>
+      <Route path="/search" element={
+        <ProtectedRoute><AISearchPage /></ProtectedRoute>
       } />
       <Route path="/browse" element={
-        <ProtectedRoute><PlaceholderPage name="Browse Listings — coming in M2" /></ProtectedRoute>
+        <ProtectedRoute><ListingsPage /></ProtectedRoute>
       } />
-      <Route path="/listings/:id" element={
-        <ProtectedRoute><PlaceholderPage name="Listing Detail — coming in M2" /></ProtectedRoute>
-      } />
-      <Route path="/cart" element={
-        <ProtectedRoute><PlaceholderPage name="Cart — coming in M3" /></ProtectedRoute>
+      <Route path="/checkout/:listingId" element={
+        <ProtectedRoute><CheckoutPage /></ProtectedRoute>
       } />
       <Route path="/checkout" element={
-        <ProtectedRoute><PlaceholderPage name="Checkout — coming in M3" /></ProtectedRoute>
+        <ProtectedRoute><CartCheckoutPage /></ProtectedRoute>
+      } />
+      <Route path="/cart" element={
+        <ProtectedRoute><CartPage /></ProtectedRoute>
+      } />
+      <Route path="/orders/:id/confirmation" element={
+        <ProtectedRoute><OrderConfirmationPage /></ProtectedRoute>
       } />
       <Route path="/orders" element={
-        <ProtectedRoute><PlaceholderPage name="Orders — coming in M3" /></ProtectedRoute>
-      } />
-      <Route path="/future-orders/new" element={
-        <ProtectedRoute><PlaceholderPage name="Future Order Form — coming in M4" /></ProtectedRoute>
+        <ProtectedRoute><OrdersListPage /></ProtectedRoute>
       } />
       <Route path="/future-orders" element={
         <ProtectedRoute><PlaceholderPage name="Future Orders — coming in M4" /></ProtectedRoute>
       } />
 
-      {/* Producer / broker / admin only */}
+      {/* Any authenticated user can sell */}
       <Route path="/producer/dashboard" element={
-        <ProtectedRoute roles={['producer', 'broker', 'admin']}>
-          <PlaceholderPage name="Producer Dashboard — coming in M2" />
-        </ProtectedRoute>
+        <ProtectedRoute><ProducerDashboard /></ProtectedRoute>
+      } />
+      <Route path="/listings/new" element={
+        <ProtectedRoute><CreateListingPage /></ProtectedRoute>
       } />
 
       {/* Admin only */}

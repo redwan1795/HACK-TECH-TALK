@@ -36,6 +36,10 @@ export interface Listing {
   locationLng?: number;
   images: string[];
   isAvailable: boolean;
+  readyToDeliver: boolean;
+  pickupDate?: string;
+  pickupTime?: string;
+  pickupLocation?: string;
   distanceMiles?: number;
   createdAt: string;
 }
@@ -57,6 +61,7 @@ export interface Order {
   platformFeeCents: number;
   totalCents: number;
   paymentRef?: string;
+  deliveryAddress?: string;
   createdAt: string;
 }
 
@@ -95,6 +100,11 @@ export interface FutureOrder {
   status: FutureOrderStatus;
   matchedListingId?: string;
   createdAt: string;
+}
+
+export interface CartItem {
+  listing: Listing;
+  quantity: number;
 }
 
 export interface PlatformConfig {
@@ -153,6 +163,7 @@ export interface AIParseDemandResponse {
 
 export interface CreateOrderRequest {
   items: { listingId: string; quantity: number }[];
+  deliveryAddress?: string;
 }
 
 export interface CreateOrderResponse {

@@ -27,6 +27,11 @@ export const redisClient = {
     await c.set(key, value, { EX: ttlSeconds });
   },
 
+  async get(key: string): Promise<string | null> {
+    const c = await getClient();
+    return c.get(key);
+  },
+
   async getDel(key: string): Promise<string | null> {
     const c = await getClient();
     return c.getDel(key);

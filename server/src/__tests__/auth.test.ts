@@ -290,42 +290,42 @@ describe('Role guards: POST /api/v1/listings', () => {
     expect(res.body.error.code).toBe('UNAUTHORIZED');
   });
 
-  it('consumer token → 403', async () => {
+  it('consumer token → 422 (auth passes, any authenticated user can sell)', async () => {
     const token = signAccessToken({ sub: 'consumer-id', email: 'c@test.com', role: 'consumer' });
     const res = await request(app)
       .post('/api/v1/listings')
       .set('Authorization', `Bearer ${token}`)
       .send({});
-    expect(res.status).toBe(403);
-    expect(res.body.error.code).toBe('FORBIDDEN');
+    expect(res.status).toBe(422);
+    expect(res.body.error.code).toBe('VALIDATION_ERROR');
   });
 
-  it('producer token → 501 (auth passes, stub returns not-implemented)', async () => {
+  it('producer token → 422 (auth passes, validation rejects empty body)', async () => {
     const token = signAccessToken({ sub: 'producer-id', email: 'p@test.com', role: 'producer' });
     const res = await request(app)
       .post('/api/v1/listings')
       .set('Authorization', `Bearer ${token}`)
       .send({});
-    expect(res.status).toBe(501);
-    expect(res.body.error.code).toBe('NOT_IMPLEMENTED');
+    expect(res.status).toBe(422);
+    expect(res.body.error.code).toBe('VALIDATION_ERROR');
   });
 
-  it('broker token → 501', async () => {
+  it('broker token → 422 (auth passes, validation rejects empty body)', async () => {
     const token = signAccessToken({ sub: 'broker-id', email: 'b@test.com', role: 'broker' });
     const res = await request(app)
       .post('/api/v1/listings')
       .set('Authorization', `Bearer ${token}`)
       .send({});
-    expect(res.status).toBe(501);
+    expect(res.status).toBe(422);
   });
 
-  it('admin token → 501', async () => {
+  it('admin token → 422 (auth passes, validation rejects empty body)', async () => {
     const token = signAccessToken({ sub: 'admin-id', email: 'a@test.com', role: 'admin' });
     const res = await request(app)
       .post('/api/v1/listings')
       .set('Authorization', `Bearer ${token}`)
       .send({});
-    expect(res.status).toBe(501);
+    expect(res.status).toBe(422);
   });
 
   it('expired token → 401', async () => {
@@ -343,13 +343,13 @@ describe('Role guards: POST /api/v1/listings', () => {
 });
 
 describe('Role guards: PUT / DELETE / PATCH on listings', () => {
-  it('PUT /api/v1/listings/:id — consumer token → 403', async () => {
+  it('PUT /api/v1/listings/:id — consumer token → 422 (auth passes, invalid UUID triggers validation)', async () => {
     const token = signAccessToken({ sub: 'c', email: 'c@t.com', role: 'consumer' });
     const res = await request(app)
       .put('/api/v1/listings/some-id')
       .set('Authorization', `Bearer ${token}`)
       .send({});
-    expect(res.status).toBe(403);
+    expect(res.status).toBe(422);
   });
 
   it('DELETE /api/v1/listings/:id — no token → 401', async () => {
@@ -357,13 +357,13 @@ describe('Role guards: PUT / DELETE / PATCH on listings', () => {
     expect(res.status).toBe(401);
   });
 
-  it('PATCH /api/v1/listings/:id/publish — producer token → 501', async () => {
+  it('PATCH /api/v1/listings/:id/publish — producer token → 422 (invalid UUID and body)', async () => {
     const token = signAccessToken({ sub: 'p', email: 'p@t.com', role: 'producer' });
     const res = await request(app)
       .patch('/api/v1/listings/some-id/publish')
       .set('Authorization', `Bearer ${token}`)
       .send({ isAvailable: true });
-    expect(res.status).toBe(501);
+    expect(res.status).toBe(422);
   });
 });
 

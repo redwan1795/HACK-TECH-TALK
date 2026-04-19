@@ -18,7 +18,7 @@ const router = Router();
 router.post(
   '/register',
   authRateLimiter,
-  body('email').isEmail().normalizeEmail(),
+  body('email').isEmail().toLowerCase().trim(),
   body('password').isLength({ min: 8 }).withMessage('Password must be at least 8 characters'),
   body('name').notEmpty().trim().withMessage('Name is required'),
   body('role').isIn(['consumer', 'producer', 'broker']).withMessage('Invalid role'),
@@ -67,7 +67,7 @@ router.post(
 router.post(
   '/login',
   authRateLimiter,
-  body('email').isEmail().normalizeEmail(),
+  body('email').isEmail().toLowerCase().trim(),
   body('password').notEmpty().withMessage('Password is required'),
   async (req, res, next) => {
     const errors = validationResult(req);
