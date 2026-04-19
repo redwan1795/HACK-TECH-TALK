@@ -1,0 +1,278 @@
+# =====================================================================
+# Community Garden — Requirements & Setup
+# =====================================================================
+# Complete prerequisites + step-by-step setup instructions.
+# Follow the sections in order. Assumes you've already cloned the repo
+# and are inside the project root folder.
+#
+#   git clone https://github.com/<user>/community-garden.git
+#   cd community-garden
+#
+# =====================================================================
+
+
+# ─── 1. SYSTEM REQUIREMENTS ──────────────────────────────────────────
+
+node          >= 20.0.0     # https://nodejs.org  (or: brew install node)
+npm           >= 10.0.0     # ships with Node
+postgresql    >= 16.0       # brew install postgresql@16   (macOS)
+                            # apt install postgresql-16    (Linux)
+git           >= 2.30       # version control
+bash          >= 3.2        # shell
+
+# Verify versions:
+#   node --version
+#   npm --version
+#   psql --version
+#   git --version
+
+# Ports used:
+#   5432  PostgreSQL
+#   4000  Express API
+#   5173  Vite dev server
+
+
+# ─── 2. START POSTGRESQL ─────────────────────────────────────────────
+
+# macOS (Homebrew):
+#   brew services start postgresql@16
+
+# Linux:
+#   sudo service postgresql start
+
+# Verify it is running:
+#   pg_isready -h localhost -p 5432
+#   → localhost:5432 - accepting connections
+
+
+# ─── 3. CREATE DATABASE + USER ───────────────────────────────────────
+
+# Open the Postgres superuser shell:
+#   psql postgres
+
+# Then paste the block below at the  postgres=#  prompt:
+
+    CREATE USER cg_user WITH PASSWORD '{your pass}';
+    CREATE DATABASE community_garden OWNER cg_user;
+    GRANT ALL PRIVILEGES ON DATABASE community_garden TO cg_user;
+    \c community_garden
+    GRANT ALL ON SCHEMA public TO cg_user;
+    ALTER SCHEMA public OWNER TO cg_user;
+    \q
+
+# One-liner alternative (runs the same commands from the shell):
+#   psql postgres -c "CREATE USER cg_user WITH PASSWORD 'shafiq123';" \
+#                 -c "CREATE DATABASE community_garden OWNER cg_user;" \
+#                 -c "GRANT ALL PRIVILEGES ON DATABASE community_garden TO cg_user;"
+#   psql -d community_garden postgres -c "GRANT ALL ON SCHEMA public TO cg_user;" \
+#                                     -c "ALTER SCHEMA public OWNER TO cg_user;"
+
+# Verify the new user works:
+#   psql -h localhost -U cg_user -d community_garden
+#   (password: shafiq123 — then \q to quit)
+
+
+# ─── 4. .GITIGNORE ───────────────────────────────────────────────────
+
+# Root-level .gitignore — create this at the project root:
+
+    # Dependencies
+    node_modules/
+    .pnp/
+    .pnp.js
+
+    # Build outputs
+    dist/
+    build/
+    .vite/
+
+    # Env files (never commit)
+    .env
+    .env.local
+    .env.*.local
+
+    # Logs
+    logs/
+    *.log
+    npm-debug.log*
+    yarn-debug.log*
+
+    # Uploads (runtime-generated)
+    server/uploads/*
+    !server/uploads/.gitkeep
+
+    # Editor / OS
+    .DS_Store
+    .DS_Store?
+    ._*
+    .Spotlight-V100
+    .Trashes
+    ehthumbs.db
+    Thumbs.db
+    .idea/
+    .vscode/
+    *.swp
+    *.swo
+
+# Quick command to write it (run from project root):
+#   cat > .gitignore <<'EOF'
+#   node_modules/
+#   dist/
+#   build/
+#   .vite/
+#   .env
+#   .env.local
+#   .env.*.local
+#   *.log
+#   server/uploads/*
+#   !server/uploads/.gitkeep
+#   .DS_Store
+#   .idea/
+#   .vscode/
+#   *.swp
+#   EOF
+
+# If a .DS_Store was already committed by mistake, remove it:
+#   git rm --cached .DS_Store
+#   find . -name .DS_Store -print0 | xargs -0 git rm --cached --ignore-unmatch
+
+
+# ─── 5. BACKEND SETUP ────────────────────────────────────────────────
+
+# From the project root:
+
+#   cd server
+#   cp .env.example .env
+#   npm install
+
+# .env defaults should already match step 3 (user cg_user / password {your pass}).
+# If you chose a different password, edit DATABASE_URL in server/.env.
+
+# Run migrations (creates 8 tables):
+#   npm run migrate
+#
+# Expected output:
+#   ✓  001_users.sql
+#   ✓  002_listings.sql
+#   ✓  003_orders.sql
+#   ✓  004_order_items.sql
+#   ✓  005_subscriptions.sql
+#   ✓  006_exchanges.sql
+#   ✓  007_future_orders.sql
+#   ✓  008_platform_config.sql
+#   ✅ Migrations complete.
+
+# Seed demo data (7 users + 6 listings):
+#   npm run seed
+#
+# Expected output:
+#   🌱 Seeding demo data...
+#      Users:     7
+#      Listings:  6
+#      Config:    1
+#   ✅ Seed complete.
+
+
+# ─── 6. FRONTEND SETUP ───────────────────────────────────────────────
+
+# Open a NEW terminal. From the project root:
+
+#   cd client
+#   cp .env.example .env
+#   npm install
+
+
+# ─── 7. RUN THE APP ──────────────────────────────────────────────────
+
+# You need two terminals running in parallel.
+# PostgreSQL must be running from step 2.
+
+# Terminal 1 — Backend (port 4000):
+#   cd server
+#   npm run dev
+#
+# Expected:
+#   🌱 Community Garden API
+#      http://localhost:4000/food
+#      http://localhost:4000/api/v1/listings
+
+# Terminal 2 — Frontend (port 5173):
+#   cd client
+#   npm run dev
+#
+# Expected:
+#   VITE v5.4.11  ready in 487 ms
+#   ➜  Local: http://localhost:5173/
+
+# Open in browser:
+#   http://localhost:5173
+
+
+# ─── 8. VERIFICATION ─────────────────────────────────────────────────
+
+# Run these — all three should succeed:
+#
+#   pg_isready -h localhost -p 5432
+#       → accepting connections
+#
+#   curl http://localhost:4000/food
+#       → {"service":"community-garden-api","status":"ok",...}
+#
+#   curl http://localhost:4000/api/v1/listings
+#       → {"listings":[...6 items],"total":6,...}
+
+
+# ─── 9. DEMO ACCOUNTS ────────────────────────────────────────────────
+
+# All passwords: password123
+#
+#   consumer@demo.local    consumer          — buy, cart, future orders
+#   maria@demo.local       producer_farmer   — create paid listings
+#   casa@demo.local        producer_farmer   — create paid listings
+#   sunny@demo.local       producer_home     — create paid listings
+#   herb@demo.local        producer_home     — exchange-only basil listing
+#   broker@demo.local      broker            — multi-producer basket
+#   admin@demo.local       operator          — admin panel / fee % control
+
+
+# ─── 10. DAILY STARTUP (AFTER FIRST SETUP) ───────────────────────────
+
+# Once installed, just these two commands in two terminals:
+#
+#   # Terminal 1:
+#   cd server && npm run dev
+#
+#   # Terminal 2:
+#   cd client && npm run dev
+#
+# PostgreSQL auto-starts on login (macOS Homebrew). If not running:
+#   brew services start postgresql@16        (macOS)
+#   sudo service postgresql start            (Linux)
+
+
+# ─── 11. TROUBLESHOOTING ─────────────────────────────────────────────
+
+# "Invalid email or password" at login
+#   → DB not seeded.   cd server && npm run seed
+
+# "connect ECONNREFUSED 127.0.0.1:5432"
+#   → Postgres is not running.   brew services start postgresql@16
+
+# "password authentication failed for user 'cg_user'"
+#   → Password mismatch between DB and server/.env.
+#     Reset with:  psql postgres -c "ALTER USER cg_user WITH PASSWORD 'shafiq123';"
+
+# "relation does not exist"
+#   → Migrations not run.   cd server && npm run migrate
+
+# Port already in use (4000 or 5173)
+#   → lsof -i :4000      (find the PID holding the port)
+#     kill -9 <PID>
+
+# Frontend shows "Network Error"
+#   → Backend crashed. Check Terminal 1.
+
+# npm install fails with native-module errors on Node 23
+#   → Try:   rm -rf node_modules package-lock.json && npm install
+
+# =====================================================================
