@@ -11,7 +11,10 @@ import { apiClient } from '../lib/api';
 import { useCartStore } from '../stores/cartStore';
 import type { CreateOrderResponse } from '@community-garden/types';
 
-const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY ?? '');
+const stripePublishableKey = import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY ?? '';
+const stripePromise = stripePublishableKey && !stripePublishableKey.includes('placeholder')
+  ? loadStripe(stripePublishableKey)
+  : null;
 
 const fmt = (cents: number) => `$${(cents / 100).toFixed(2)}`;
 
@@ -97,6 +100,62 @@ function PaymentForm({
   );
 }
 
+// ── Demo mode form (no Stripe required) ───────────────────────────────────────
+function DemoPaymentForm({
+  orderId,
+  subtotalCents,
+  feePercent,
+  platformFeeCents,
+  totalCents,
+}: {
+  orderId: string;
+  subtotalCents: number;
+  feePercent: number;
+  platformFeeCents: number;
+  totalCents: number;
+}) {
+  const navigate = useNavigate();
+  const clearCart = useCartStore((s) => s.clearCart);
+  const [placing, setPlacing] = useState(false);
+
+  const handlePlace = async () => {
+    setPlacing(true);
+    try {
+      await apiClient.post(`/orders/${orderId}/confirm`);
+      clearCart();
+      navigate(`/orders/${orderId}/confirmation`);
+    } catch {
+      setPlacing(false);
+    }
+  };
+
+  return (
+    <div className="space-y-4">
+      <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-4 space-y-2 text-sm">
+        <div className="flex justify-between text-gray-600">
+          <span>Subtotal</span><span>{fmt(subtotalCents)}</span>
+        </div>
+        <div className="flex justify-between text-gray-600">
+          <span>Service fee ({feePercent}%)</span><span>{fmt(platformFeeCents)}</span>
+        </div>
+        <div className="flex justify-between font-bold text-gray-800 pt-2 border-t border-gray-100">
+          <span>Total</span><span>{fmt(totalCents)}</span>
+        </div>
+      </div>
+      <div className="bg-yellow-50 border border-yellow-200 rounded-xl px-4 py-3 text-xs text-yellow-700">
+        Demo mode — payment processing is simulated.
+      </div>
+      <button
+        onClick={handlePlace}
+        disabled={placing}
+        className="w-full bg-garden-600 hover:bg-garden-700 text-white font-semibold py-3 rounded-xl disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+      >
+        {placing ? 'Placing order…' : `Place Order · ${fmt(totalCents)}`}
+      </button>
+    </div>
+  );
+}
+
 // ── Outer page: creates the order, then renders Elements + form ───────────────
 export default function CartCheckoutPage() {
   const navigate = useNavigate();
@@ -166,18 +225,28 @@ export default function CartCheckoutPage() {
         </button>
         <h1 className="text-2xl font-bold text-garden-700">Payment</h1>
 
-        <Elements
-          stripe={stripePromise}
-          options={{ clientSecret: orderData.stripeClientSecret }}
-        >
-          <PaymentForm
+        {orderData.stripeClientSecret === 'demo_mode' || !stripePromise ? (
+          <DemoPaymentForm
             orderId={orderData.orderId}
             subtotalCents={orderData.subtotalCents}
             feePercent={orderData.feePercent}
             platformFeeCents={orderData.platformFeeCents}
             totalCents={orderData.totalCents}
           />
-        </Elements>
+        ) : (
+          <Elements
+            stripe={stripePromise}
+            options={{ clientSecret: orderData.stripeClientSecret }}
+          >
+            <PaymentForm
+              orderId={orderData.orderId}
+              subtotalCents={orderData.subtotalCents}
+              feePercent={orderData.feePercent}
+              platformFeeCents={orderData.platformFeeCents}
+              totalCents={orderData.totalCents}
+            />
+          </Elements>
+        )}
       </div>
     </div>
   );

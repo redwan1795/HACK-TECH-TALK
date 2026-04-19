@@ -7,6 +7,10 @@ import { env } from '../config/env';
 
 const router = Router();
 
+function isDemoMode(): boolean {
+  return !env.stripeSecretKey || env.stripeSecretKey.includes('placeholder');
+}
+
 function getStripe(): InstanceType<typeof Stripe> {
   return new Stripe(env.stripeSecretKey);
 }
@@ -72,6 +76,41 @@ router.post(
       const feePercent = configRows.length > 0 ? parseFloat(configRows[0].value) : 7;
       const platformFeeCents = Math.round(subtotalCents * feePercent / 100);
       const totalCents = subtotalCents + platformFeeCents;
+
+      // Demo mode: skip Stripe, create order as paid immediately
+      if (isDemoMode()) {
+        const { rows: orderRows } = await dbQuery(
+          `INSERT INTO orders
+             (consumer_id, subtotal_cents, fee_percent, platform_fee_cents, total_cents, stripe_payment_intent_id, status)
+           VALUES ($1, $2, $3, $4, $5, $6, 'paid')
+           RETURNING id`,
+          [req.user!.sub, subtotalCents, feePercent, platformFeeCents, totalCents, 'demo_mode']
+        );
+        const orderId = orderRows[0].id as string;
+
+        for (const item of items) {
+          const listing = listings.find((l: any) => l.id === item.listingId);
+          await dbQuery(
+            `INSERT INTO order_items (order_id, listing_id, quantity, unit_price_cents)
+             VALUES ($1, $2, $3, $4)`,
+            [orderId, item.listingId, item.quantity, listing.price_cents]
+          );
+          await dbQuery(
+            `UPDATE listings SET quantity_available = quantity_available - $1 WHERE id = $2`,
+            [item.quantity, item.listingId]
+          );
+        }
+
+        res.status(201).json({
+          orderId,
+          subtotalCents,
+          feePercent,
+          platformFeeCents,
+          totalCents,
+          stripeClientSecret: 'demo_mode',
+        });
+        return;
+      }
 
       // Create Stripe PaymentIntent
       const stripe = getStripe();
@@ -144,6 +183,14 @@ router.post(
       }
 
       if (order.status === 'paid') {
+        const full = await getFullOrder(req.params.id);
+        res.json(full);
+        return;
+      }
+
+      // Demo mode orders are already paid at creation
+      if (order.stripe_payment_intent_id === 'demo_mode') {
+        await dbQuery(`UPDATE orders SET status = 'paid' WHERE id = $1`, [req.params.id]);
         const full = await getFullOrder(req.params.id);
         res.json(full);
         return;
