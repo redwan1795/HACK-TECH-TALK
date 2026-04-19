@@ -1,4 +1,5 @@
-import { useNavigate, useParams } from 'react-router-dom';
+import { useEffect } from 'react';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { apiClient } from '../lib/api';
 
@@ -57,10 +58,11 @@ export default function OrderConfirmationPage() {
     );
   }
 
-  if (isError || !order) {
-    navigate('/', { replace: true });
-    return null;
-  }
+  useEffect(() => {
+    if (isError) navigate('/', { replace: true });
+  }, [isError, navigate]);
+
+  if (isLoading || !order) return null;
 
   return (
     <div className="min-h-screen bg-garden-50 py-8">
@@ -96,12 +98,12 @@ export default function OrderConfirmationPage() {
           </div>
         </div>
 
-        <button
-          onClick={() => navigate('/search')}
-          className="w-full bg-garden-600 hover:bg-garden-700 text-white font-semibold py-3 rounded-xl transition-colors"
+        <Link
+          to="/search"
+          className="block w-full bg-garden-600 hover:bg-garden-700 text-white font-semibold py-3 rounded-xl transition-colors text-center"
         >
           Continue Shopping
-        </button>
+        </Link>
       </div>
     </div>
   );
