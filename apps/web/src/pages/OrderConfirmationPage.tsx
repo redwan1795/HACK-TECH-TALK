@@ -45,6 +45,10 @@ export default function OrderConfirmationPage() {
     retry: false,
   });
 
+  useEffect(() => {
+    if (isError) navigate('/', { replace: true });
+  }, [isError, navigate]);
+
   if (isLoading) {
     return (
       <div className="min-h-screen bg-garden-50 py-8">
@@ -58,11 +62,7 @@ export default function OrderConfirmationPage() {
     );
   }
 
-  useEffect(() => {
-    if (isError) navigate('/', { replace: true });
-  }, [isError, navigate]);
-
-  if (isLoading || !order) return null;
+  if (!order) return null;
 
   return (
     <div className="min-h-screen bg-garden-50 py-8">
